@@ -1,13 +1,29 @@
 ---
 layout: timeline
-currentDate: '2023-01-15'
+currentDate: '2020-01-15'
 ---
+# hehe
+
 <CommitInfo 
-  title="Fix security vulnerability in authentication module (#78)"
+  title="Initial project setup and repository creation (#1)"
   author="Magnus Nordin"
-  message="Fixed a critical security vulnerability in the authentication module that could allow unauthorized access. Updated dependency versions and added additional validation steps."
-  changes="5 files changed, 87 insertions(+), 32 deletions(-)"
-  :files="['package.json', 'src/auth/authenticate.js', 'src/auth/validation.js', 'tests/auth_test.js', 'README.md']"
+  message="Set up the project repository with initial structure, configuration, and dependencies. Created the basic framework for the application."
+  changes="7 files changed, 342 insertions(+), 0 deletions(-)"
+  :files="['package.json', 'README.md', 'tsconfig.json', 'src/index.ts', 'src/config.ts', '.gitignore', '.eslintrc']"
+  date="2023-01-15"
+/>
+---
+layout: timeline
+---
+# blabbla
+
+<CommitInfo 
+  title="Initial project setup and repository creation (#1)"
+  author="hmm"
+  message="Set up the project repository with initial structure, configuration, and dependencies. Created the basic framework for the application."
+  changes="7 files changed, 342 insertions(+), 0 deletions(-)"
+  :files="['package.json', 'README.md', 'tsconfig.json', 'src/index.ts', 'src/config.ts', '.gitignore', '.eslintrc']"
+  date="2023-01-15"
 />
 
 ---
@@ -15,7 +31,7 @@ layout: timeline
 currentDate: '2023-03-10'
 ---
 
-# First Milestone
+# Something
 March 10, 2023
 
 - MVP functionality completed
@@ -100,3 +116,15 @@ currentDate: '2023-12-15'
   :files="['package.json', 'src/auth/authenticate.js', 'src/auth/validation.js', 'tests/auth_test.js', 'README.md']"
   date="2023-12-03"
 />
+
+---
+layout: timeline
+---
+
+# Security Impact Analysis
+## Associated with the Critical Security Fix
+
+- No user data was compromised
+- Attack vector required authenticated access
+- Deployed to production within 24 hours of discovery
+- All dependencies updated to latest secure versions

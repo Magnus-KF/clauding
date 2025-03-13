@@ -35,7 +35,8 @@ const props = defineProps({
   },
   timelineEvents: {
     type: Array as () => TimelineEvent[],
-    required: true
+    required: true,
+    default: () => []
   },
   currentSlideIndex: {
     type: Number,
@@ -53,20 +54,40 @@ const formatDate = (dateString: string) => {
   })
 }
 
-// Calculate timeline start and end dates
-const startDate = computed(() => new Date(props.timelineEvents[0].date).getTime())
-const endDate = computed(() => new Date(props.timelineEvents[props.timelineEvents.length - 1].date).getTime())
-const timelineSpan = computed(() => endDate.value - startDate.value)
+// Calculate timeline start and end dates with safety checks
+const startDate = computed(() => {
+  if (!props.timelineEvents || props.timelineEvents.length === 0) {
+    return new Date().getTime()
+  }
+  return new Date(props.timelineEvents[0].date).getTime()
+})
+
+const endDate = computed(() => {
+  if (!props.timelineEvents || props.timelineEvents.length === 0) {
+    return new Date().getTime()
+  }
+  return new Date(props.timelineEvents[props.timelineEvents.length - 1].date).getTime()
+})
+
+const timelineSpan = computed(() => {
+  const span = endDate.value - startDate.value
+  // Ensure we have a non-zero span
+  return span > 0 ? span : 1
+})
 
 // Calculate the position percentage for an event
 const calculatePosition = (event: TimelineEvent) => {
+  if (!event || !event.date) return 0
+  
   const eventDate = new Date(event.date).getTime()
   const percentage = ((eventDate - startDate.value) / timelineSpan.value) * 100
-  return percentage
+  return Math.max(0, Math.min(100, percentage))
 }
 
 // Calculate the current progress percentage
 const progressPercentage = computed(() => {
+  if (!props.currentDate) return 0
+  
   const currentDateTimestamp = new Date(props.currentDate).getTime()
   const percentage = ((currentDateTimestamp - startDate.value) / timelineSpan.value) * 100
   return Math.max(0, Math.min(100, percentage))
@@ -74,11 +95,13 @@ const progressPercentage = computed(() => {
 
 // Check if an event is active (current)
 const isActive = (event: TimelineEvent) => {
+  if (!event || !event.date || !props.currentDate) return false
   return event.date === props.currentDate
 }
 
 // Check if an event has passed
 const isPassed = (event: TimelineEvent) => {
+  if (!event || !event.date || !props.currentDate) return false
   return new Date(event.date) < new Date(props.currentDate)
 }
 </script>

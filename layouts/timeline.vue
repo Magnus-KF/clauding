@@ -59,10 +59,14 @@ const computedCurrentDate = computed(() => {
   flex-direction: column;
   padding: 0;
   height: 100%;
+  /* Ensure slides can scroll if content exceeds fixed height */
+  overflow-y: auto;
 }
 
 .timeline-layout .content {
   padding: 2rem;
   flex: 1;
+  /* Increase min-height to accommodate larger components */
+  min-height: 600px;
 }
 </style>

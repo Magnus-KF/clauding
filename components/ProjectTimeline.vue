@@ -12,14 +12,9 @@
       >
         <div class="event-marker"></div>
         <div class="event-label">
-          <div class="event-date">{{ formatDate(event.date) }}</div>
           <div class="event-title">{{ event.title }}</div>
         </div>
       </div>
-    </div>
-    
-    <div class="current-date">
-      {{ formatDate(currentDate) }}
     </div>
   </div>
 </template>
@@ -91,8 +86,8 @@ const isPassed = (event: TimelineEvent) => {
 <style>
 .project-timeline {
   width: 100%;
-  height: 80px;
-  padding: 1rem 2rem;
+  height: 50px; /* Reduced from 80px */
+  padding: 0.75rem 2rem; /* Reduced padding */
   background: rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 10;
@@ -102,7 +97,7 @@ const isPassed = (event: TimelineEvent) => {
   position: relative;
   height: 3px;
   background: rgba(0, 0, 0, 0.1);
-  margin: 30px 0;
+  margin: 15px 0; /* Reduced from 30px */
 }
 
 .timeline-progress {
@@ -130,18 +125,13 @@ const isPassed = (event: TimelineEvent) => {
 
 .event-label {
   position: absolute;
-  top: 15px;
+  top: 10px; /* Reduced from 15px */
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: 0.8rem;
   opacity: 0.7;
   transition: all 0.3s ease;
-}
-
-.event-date {
-  font-size: 0.7rem;
-  opacity: 0.8;
 }
 
 .event-title {
@@ -157,20 +147,11 @@ const isPassed = (event: TimelineEvent) => {
 
 .timeline-event.active .event-label {
   opacity: 1;
-  top: 18px;
+  top: 10px; /* Reduced from 18px */
   font-weight: bold;
 }
 
 .timeline-event.passed .event-marker {
   background: #3b82f6;
-}
-
-.current-date {
-  position: absolute;
-  right: 2rem;
-  top: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #3b82f6;
 }
 </style>

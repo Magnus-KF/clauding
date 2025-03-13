@@ -65,8 +65,9 @@ const computedCurrentDate = computed(() => {
 
 .timeline-layout .content {
   padding: 2rem;
+  padding-top: 1.5rem; /* Reduced top padding */
   flex: 1;
-  /* Increase min-height to accommodate larger components */
-  min-height: 600px;
+  /* Adjust min-height now that timeline is smaller */
+  min-height: 630px;
 }
 </style>

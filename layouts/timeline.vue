@@ -56,14 +56,14 @@ const timelineEvents = ref([])
 // The timeline below is ordered chronologically, which lets us maintain the order
 // without hardcoding slide numbers (which would break when inserting new slides)
 const timelineData = [
-  { date: '2022-01-15', title: 'Project Kickoff' },
-  { date: '2023-03-10', title: 'First Milestone' },
-  { date: '2023-05-20', title: 'Major Challenge' },
-  { date: '2023-07-15', title: 'Mid-Project Review' },
-  { date: '2023-10-05', title: 'Final Testing' },
-  { date: '2023-11-30', title: 'Project Delivery' },
-  { date: '2023-12-10', title: 'Key Project Commits' },
-  { date: '2025-12-15', title: 'Critical Security Fix' }
+  { date: '2021-11-05', title: 'git init' },
+  // { date: '2022-03-10', title: 'First Milestone' },
+  // { date: '2023-05-20', title: 'Major Challenge' },
+  // { date: '2023-07-15', title: 'Mid-Project Review' },
+  // { date: '2023-10-05', title: 'Final Testing' },
+  // { date: '2024-11-30', title: 'Project Delivery' },
+  // { date: '2024-12-10', title: 'Key Project Commits' },
+  { date: '2025-03-19', title: 'Today' }
 ];
 
 // Initialize the data, sorting by date to ensure chronological order

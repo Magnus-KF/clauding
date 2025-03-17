@@ -1656,3 +1656,24 @@ It'll commit and push the changes for you too:
   The component provides a metaphorical visualization of FluidMagic's operations with interactive
   state changes matching the conversion capabilities in the requirements.
 ```
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+
+## Live test
+Would you kindly fix the timeline component.
+```
+  { date: '2025-03-17', title: 'Monday' },
+  { date: '2025-03-19', title: 'Today' }
+```
+These events are quite close and that causes visual bugs.
+The circle for 'Monday' appears after 'Today', despite being an earlier date. 
+Slightly more distance between them would also be nice. 
+---
+layout: timeline
+currentDate: '2025-03-19'
+---
+
+## Wednesday

@@ -140,7 +140,7 @@ const calculatePosition = (event: TimelineEvent) => {
   // Blend between date-based and index-based positioning
   // maxGapPercent defines the maximum percentage gap allowed between consecutive events
   const maxGapPercent = 25 // Maximum 25% gap between any two events
-  const minSpacing = 8 // Minimum 8% spacing between events
+  const minSpacing = 15 // Minimum 15% spacing between events (increased from 8%)
   
   // Calculate index-based position (evenly spaced)
   // Add edge padding to prevent labels from being cut off at the edges
@@ -152,9 +152,17 @@ const calculatePosition = (event: TimelineEvent) => {
   // Calculate weight factor based on how stretched the timeline is
   // If events are very unevenly distributed, we'll lean more toward index-based positioning
   const maxRawGap = getMaxRawGap()
-  const blendFactor = maxRawGap > maxGapPercent 
+  const minRawGap = getMinRawGap() // Get the minimum gap between events
+  
+  // Calculate blend factor based on both max gaps (too large) and min gaps (too small)
+  let blendFactor = maxRawGap > maxGapPercent 
     ? Math.min(1, (maxRawGap - maxGapPercent) / 50) // Gradually blend based on how much the max gap exceeds our limit
     : 0
+    
+  // If we have very close dates, increase blend factor to favor index-based positioning
+  if (minRawGap < 5) { // If any two events are within 5% of timeline span
+    blendFactor = Math.max(blendFactor, 0.7 + (5 - minRawGap) / 5 * 0.3) // 0.7 to 1.0 blend factor
+  }
   
   // For first and last events, use more index-based positioning to keep them from edges
   let adjustedBlendFactor = blendFactor
@@ -166,8 +174,9 @@ const calculatePosition = (event: TimelineEvent) => {
   let blendedPercentage = (1 - adjustedBlendFactor) * rawPercentage + adjustedBlendFactor * indexBasedPercent
   
   // Force minimum spacing between events for better readability
-  // Find closest events and adjust if needed
+  // Find closest events and adjust if needed, with stronger minimum spacing enforcement
   if (totalEvents > 1) {
+    // First calculate all positions
     const positions = props.timelineEvents.map(e => {
       const eDate = new Date(e.date).getTime()
       const ePercentage = ((eDate - startDate.value) / timelineSpan.value) * 100
@@ -182,28 +191,51 @@ const calculatePosition = (event: TimelineEvent) => {
       
       return {
         date: e.date,
-        position: Math.max(0, Math.min(100, eBlendedPercentage))
+        originalPosition: eBlendedPercentage,  // Store original position for reference
+        position: Math.max(0, Math.min(100, eBlendedPercentage)),
+        index: eIndex  // Store the actual event index
       }
     }).sort((a, b) => a.position - b.position)
     
+    // Apply minimum spacing constraints in a separate iterative pass
+    // This ensures each event can be properly positioned with respect to all others
+    let passCount = 0
+    let adjustmentMade = true
+    
+    // Iteratively adjust positions until no more changes are needed or max passes reached
+    while (adjustmentMade && passCount < 3) {
+      adjustmentMade = false
+      passCount++
+      
+      // Forward pass - push events to the right if too close to previous event
+      for (let i = 1; i < positions.length; i++) {
+        const prevPos = positions[i-1].position
+        const currPos = positions[i].position
+        
+        if (currPos - prevPos < minSpacing) {
+          positions[i].position = prevPos + minSpacing
+          adjustmentMade = true
+        }
+      }
+      
+      // Backward pass - push events to the left if too close to next event
+      for (let i = positions.length - 2; i >= 0; i--) {
+        const nextPos = positions[i+1].position
+        const currPos = positions[i].position
+        
+        if (nextPos - currPos < minSpacing) {
+          // Avoid pushing below 0 or crowding the previous event
+          const minPos = i > 0 ? positions[i-1].position + minSpacing : edgePadding
+          positions[i].position = Math.max(minPos, nextPos - minSpacing)
+          adjustmentMade = true
+        }
+      }
+    }
+    
+    // Finally, apply the adjusted position to our current event
     const currentPosition = positions.find(p => p.date === event.date)
     if (currentPosition) {
-      const currentIndex = positions.indexOf(currentPosition)
-      if (currentIndex > 0) {
-        const prevPosition = positions[currentIndex - 1].position
-        if (currentPosition.position - prevPosition < minSpacing) {
-          blendedPercentage = prevPosition + minSpacing
-        }
-      }
-      if (currentIndex < positions.length - 1) {
-        const nextPosition = positions[currentIndex + 1].position
-        if (nextPosition - currentPosition.position < minSpacing) {
-          // Only adjust if we're not already pushing against a preceding event
-          if (currentIndex === 0 || (currentPosition.position - positions[currentIndex - 1].position >= minSpacing)) {
-            blendedPercentage = nextPosition - minSpacing
-          }
-        }
-      }
+      blendedPercentage = currentPosition.position
     }
   }
   
@@ -227,6 +259,27 @@ const getMaxRawGap = () => {
   }
   
   return maxGap
+}
+
+// Helper function to find the minimum gap between consecutive events in raw percentage
+const getMinRawGap = () => {
+  if (!props.timelineEvents || props.timelineEvents.length <= 1) return 100
+  
+  let minGap = 100 // Start with maximum possible value
+  const sortedEvents = [...props.timelineEvents].sort((a, b) => 
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  )
+  
+  for (let i = 1; i < sortedEvents.length; i++) {
+    const prevDate = new Date(sortedEvents[i-1].date).getTime()
+    const currDate = new Date(sortedEvents[i].date).getTime()
+    const gap = ((currDate - prevDate) / timelineSpan.value) * 100
+    if (gap > 0) { // Only consider non-zero gaps
+      minGap = Math.min(minGap, gap)
+    }
+  }
+  
+  return minGap
 }
 
 // Calculate the current progress percentage (matching our new spacing algorithm)

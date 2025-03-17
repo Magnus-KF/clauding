@@ -1184,19 +1184,7 @@ def inject_streamfile_shortener(case_runner: CaseRunner):
     case_runner.parse_convert = decorator(case_runner.parse_convert)
 ```
 
----
-layout: timeline
-currentDate: '2023-06-27'
----
 
-<CommitInfo 
-  title="Make MVP API run locally (#534)"
-  author="Magnus Kvittingen Fresvik"
-  :message="'🎉✨Added an MVP feature for gudrun and corresponding entities'"
-  changes="37 files changed, 2310 insertions(+), 4 deletions(-)"
-  :files="['.pre-commit-config.yaml','api/README-API.md','api/src/app.py','api/src/authentication/access_control.py','api/src/authentication/authentication.py','api/src/authentication/mock_token_generator.py','api/src/authentication/models.py','api/src/common/exception_handlers.py','api/src/common/exceptions.py','api/src/common/logger.py','api/src/common/middleware.py','api/src/common/responses.py','api/src/config.py','api/src/entities/ConverterItem.py','api/src/entities/Converters.py','api/src/entities/TotalMolarStreamItem.py','api/src/entities/WellDataInputItem.py','api/src/entities/WellItem.py','api/src/features/gudrun/gudrun_case_data/fluid_lib_cme_fluid_5fluids.txt','api/src/features/gudrun/gudrun_feature.py','api/src/features/gudrun/use_cases/get_converter_by_id.py','api/src/features/gudrun/use_cases/get_converters.py','api/src/features/gudrun/use_cases/post_convert_rate_to_moles.py','api/src/features/health_check/health_check_feature.py','api/src/features/whoami/whoami_feature.py','api/src/init.sh','api/src/pytest.ini','api/src/tests/__init__.py','api/src/tests/integration/__init__.py','api/src/tests/integration/features/health_check/health_check_feature_test.nopy','api/src/tests/integration/features/whoami/whoami_feature_test.nopy','api/src/tests/unit/__init__.py','api/temp_test_folder/temp_gudrun_example_data/api_test_data_5fluids.csv','api/temp_test_folder/temp_gudrun_example_data/gudrun_dev.magic','api/temp_test_folder/temp_gudrun_example_data/gudrun_original.magic','poetry.lock','pyproject.toml']"
-  date="2023-06-27"
-/>
 ---
 layout: timeline
 currentDate: '2023-06-27'
@@ -1471,6 +1459,74 @@ src: ./pages/cl-0110-fm.md
 
 ---
 layout: timeline
+currentDate: '2023-06-27'
+---
+
+<CommitInfo 
+  title="Make MVP API run locally (#534)"
+  author="Magnus Kvittingen Fresvik"
+  :message="'🎉✨Added an MVP feature for gudrun and corresponding entities'"
+  changes="37 files changed, 2310 insertions(+), 4 deletions(-)"
+  :files="['.pre-commit-config.yaml','api/README-API.md','api/src/app.py','api/src/authentication/access_control.py','api/src/authentication/authentication.py','api/src/authentication/mock_token_generator.py','api/src/authentication/models.py','api/src/common/exception_handlers.py','api/src/common/exceptions.py','api/src/common/logger.py','api/src/common/middleware.py','api/src/common/responses.py','api/src/config.py','api/src/entities/ConverterItem.py','api/src/entities/Converters.py','api/src/entities/TotalMolarStreamItem.py','api/src/entities/WellDataInputItem.py','api/src/entities/WellItem.py','api/src/features/gudrun/gudrun_case_data/fluid_lib_cme_fluid_5fluids.txt','api/src/features/gudrun/gudrun_feature.py','api/src/features/gudrun/use_cases/get_converter_by_id.py','api/src/features/gudrun/use_cases/get_converters.py','api/src/features/gudrun/use_cases/post_convert_rate_to_moles.py','api/src/features/health_check/health_check_feature.py','api/src/features/whoami/whoami_feature.py','api/src/init.sh','api/src/pytest.ini','api/src/tests/__init__.py','api/src/tests/integration/__init__.py','api/src/tests/integration/features/health_check/health_check_feature_test.nopy','api/src/tests/integration/features/whoami/whoami_feature_test.nopy','api/src/tests/unit/__init__.py','api/temp_test_folder/temp_gudrun_example_data/api_test_data_5fluids.csv','api/temp_test_folder/temp_gudrun_example_data/gudrun_dev.magic','api/temp_test_folder/temp_gudrun_example_data/gudrun_original.magic','poetry.lock','pyproject.toml']"
+  date="2023-06-27"
+/>
+
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+
+\> Would you kindly update CommitInfo component to support status
+   of files in this format:
+```ts
+  :files="[{'path': 'fluidmagic/eos/eos.py', 'status': 'Modified'},
+  {'path': 'fluidmagic/eos/eos_tools.py', 'status': 'Deleted'},
+  {'path': 'fluidmagic/eos/eos_utils.py', 'status': 'Added'}]"
+```
+  But it should also be backwards compatible with the simple 
+  lists:
+```ts
+:files="['.bumpversion.cfg','README.md']
+```
+
+● I'll update the CommitInfo component to support both file
+  formats.
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+● I've updated the CommitInfo component to support both file
+  formats and include file status indicators:
+
+  1. Added support for both file formats:
+    - Simple string arrays: `['.bumpversion.cfg','README.md']`
+    - Detailed objects: `[{'path': 'fluidmagic/eos/eos.py', 'status': 'Modified'}]`
+  2. Added status indicators:
+    - 'Added' - Green plus icon
+    - 'Deleted' - Red minus icon with strikethrough text
+    - 'Modified' - Blue edit icon
+    - 'Changed' - Yellow update icon
+  3. Enhanced the file display:
+    - Shows only the filename with optional path context
+    - Visual styling for each status type (color-coded icons)
+    - Strikethrough for deleted files
+    - Maintains file extension syntax highlighting
+  4. Made the component backward compatible:
+    - Simple string arrays default to 'Modified' status
+    - File paths are properly parsed to display just the
+  filename when needed
+  1. Changed the heading from "Modified files" to "Changed
+  files" to better reflect the variety of statuses now
+  supported.
+
+  The component now provides a more GitHub-like experience with
+  visual status indicators while maintaining compatibility with
+  both file list formats.
+
+---
+layout: timeline
 currentDate: '2023-10-27'
 ---
 
@@ -1505,55 +1561,5 @@ currentDate: '2025-03-17'
 
  But I do not know Vue, just barely know js
 
----
-layout: timeline
-currentDate: '2025-03-19'
----
+ 
 
-\> Would you kindly update CommitInfo component to support status
-   of files in this format:
-```ts
-  :files="[{'path': 'fluidmagic/eos/eos.py', 'status': 'Modified'},
-  {'path': 'fluidmagic/eos/eos_tools.py', 'status': 'Deleted'},
-  {'path': 'fluidmagic/eos/eos_utils.py', 'status': 'Added'}]"
-```
-  But it should also be backwards compatible with the simple 
-  lists:
-```ts
-:files="['.bumpversion.cfg','README.md']
-```
-
-● I'll update the CommitInfo component to support both file
-  formats.
-
----
-layout: timeline
-currentDate: '2025-03-19'
----
-● I've updated the CommitInfo component to support both file
-  formats and include file status indicators:
-
-  1. Added support for both file formats:
-    - Simple string arrays: `['.bumpversion.cfg','README.md']`
-    - Detailed objects: `[{'path': 'fluidmagic/eos/eos.py', 'status': 'Modified'}]`
-  2. Added status indicators:
-    - 'Added' - Green plus icon
-    - 'Deleted' - Red minus icon with strikethrough text
-    - 'Modified' - Blue edit icon
-    - 'Changed' - Yellow update icon
-  3. Enhanced the file display:
-    - Shows only the filename with optional path context
-    - Visual styling for each status type (color-coded icons)
-    - Strikethrough for deleted files
-    - Maintains file extension syntax highlighting
-  4. Made the component backward compatible:
-    - Simple string arrays default to 'Modified' status
-    - File paths are properly parsed to display just the
-  filename when needed
-  1. Changed the heading from "Modified files" to "Changed
-  files" to better reflect the variety of statuses now
-  supported.
-
-  The component now provides a more GitHub-like experience with
-  visual status indicators while maintaining compatibility with
-  both file list formats.

@@ -1662,7 +1662,7 @@ layout: timeline
 currentDate: '2025-03-17'
 ---
 
-## Some limitations:
+## Limitations:
 ```
 ● Read(file_path: "slides.md")…
   ⎿  File content (26011 tokens) exceeds maximum allowed tokens (20000). Please use offset and limit
@@ -1671,9 +1671,35 @@ currentDate: '2025-03-17'
 ```
 slides.md is currently 1600 lines long
 
+
+`Can you make the events more readable on hover`
+
+Struggles with css and such. Which makes some sense. Can also forget about tailwind etc
+
+It tried and failed to fix the visual error at the end of the timeline. But works surprisingly well using these relativly niche frameworks
+
+💸💸💸
+![alt text](/image-1.png)
+
 ---
 layout: timeline
 currentDate: '2025-03-19'
 ---
-## Live test
+## Live demo
 
+>Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
+
+Think deeply about this one, because I want you to make an interactive zen garden/pond.
+Make a component that has a canvas with randomly generated *rocks* surrounded by *water*.
+When the user clicks on the screen, waves radiates outward and the rocks cause disruption of the waves. It returns to stillness after the waves have settled.
+I want you to make a new component and then add it and only it to `/pages/zen.md`.
+
+---
+src: ./pages/zen.md
+---
+
+---
+layout: timeline
+currentDate: '2025-03-19'
+---
+[Overview](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)

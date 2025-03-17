@@ -9,11 +9,15 @@
         class="timeline-event"
         :class="{ active: isActive(event), passed: isPassed(event) }"
         :style="{ left: calculatePosition(event) + '%' }"
+        @mouseover="handleMouseOver(event)"
+        @mouseout="handleMouseOut()"
       >
         <div class="event-marker"></div>
-        <div class="event-label">
+        <div class="event-label" :style="{ opacity: getLabelOpacity(event) }">
           <div class="event-title" v-html="parseEmoji(event.title)"></div>
-          <div class="event-date">{{ formatDate(event.date) }}</div>
+          <div class="event-date" :style="{ opacity: getDateOpacity(event), height: getDateHeight(event) }">
+            {{ formatDate(event.date) }}
+          </div>
         </div>
       </div>
     </div>
@@ -21,13 +25,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 interface TimelineEvent {
   date: string;
   title: string;
   slideIndex: number;
 }
+
+const hoveredEvent = ref<TimelineEvent | null>(null);
 
 const props = defineProps({
   currentDate: {
@@ -44,6 +50,44 @@ const props = defineProps({
     required: true
   }
 })
+
+// Handle mouse events
+const handleMouseOver = (event: TimelineEvent) => {
+  hoveredEvent.value = event;
+}
+
+const handleMouseOut = () => {
+  hoveredEvent.value = null;
+}
+
+// Control label visibility based on hover and active state
+const getLabelOpacity = (event: TimelineEvent) => {
+  if (isActive(event)) return 1;
+  if (hoveredEvent.value === event && !hasActiveEventNearby(event)) return 1;
+  return 0.7;
+}
+
+// Control date visibility based on hover and active state
+const getDateOpacity = (event: TimelineEvent) => {
+  if (isActive(event)) return 1;
+  if (hoveredEvent.value === event && !hasActiveEventNearby(event)) return 0.8;
+  return 0;
+}
+
+const getDateHeight = (event: TimelineEvent) => {
+  if (isActive(event)) return 'auto';
+  if (hoveredEvent.value === event && !hasActiveEventNearby(event)) return 'auto';
+  return '0';
+}
+
+// Check if there's an active event nearby (to prevent hover effects close to active events)
+const hasActiveEventNearby = (event: TimelineEvent) => {
+  return props.timelineEvents.some(e => 
+    isActive(e) && 
+    e !== event && 
+    Math.abs(calculatePosition(e) - calculatePosition(event)) < 15
+  );
+}
 
 // Format date for display (e.g., "Jan 15, 2023")
 const formatDate = (dateString: string) => {
@@ -356,16 +400,31 @@ const progressPercentage = computed(() => {
 const isActive = (event: TimelineEvent) => {
   if (!event || !event.date || !props.currentDate) return false
   
-  // Exact date match
-  if (event.date === props.currentDate) return true
+  // If this is the exact event that matches the current date
+  const exactMatch = event.date === props.currentDate;
   
-  // For the first slide, also match if we're before the first event
-  if (event === props.timelineEvents[0] && 
-      new Date(props.currentDate).getTime() <= new Date(event.date).getTime()) {
-    return true
+  // If we're at the first event and the current date is before or equal to it
+  const isFirstEventAndBeforeIt = 
+    event === props.timelineEvents[0] && 
+    new Date(props.currentDate).getTime() <= new Date(event.date).getTime();
+  
+  // Special handling for the last two timeline events (Monday and Today)
+  // This fixes the specific issue where both Monday and Today were showing as active
+  if (props.timelineEvents.length >= 2) {
+    const lastTwoEvents = [
+      props.timelineEvents[props.timelineEvents.length - 2],
+      props.timelineEvents[props.timelineEvents.length - 1]
+    ];
+    
+    // If this event is one of the last two events
+    if (lastTwoEvents.includes(event)) {
+      // Only make it active if it's an exact match with currentDate
+      return exactMatch;
+    }
   }
   
-  return false
+  // For all other cases, follow the original logic
+  return exactMatch || isFirstEventAndBeforeIt;
 }
 
 // Check if an event has passed
@@ -449,6 +508,10 @@ const isPassed = (event: TimelineEvent) => {
   min-width: 100px;
 }
 
+.timeline-event.active {
+  z-index: 30; /* Higher z-index for active events */
+}
+
 .event-marker {
   width: 12px;
   height: 12px;
@@ -467,7 +530,6 @@ const isPassed = (event: TimelineEvent) => {
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: 0.75rem;
-  opacity: 0.7;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.9);
   padding: 2px 6px;
@@ -486,31 +548,13 @@ const isPassed = (event: TimelineEvent) => {
 
 .event-date {
   font-size: 0.7rem;
-  opacity: 0;
-  height: 0;
   transition: all 0.3s ease;
   color: #3b82f6;
-}
-
-.timeline-event:hover .event-date {
-  opacity: 0.8;
-  height: auto;
-  margin-top: 2px;
-}
-
-.timeline-event.active .event-date {
-  opacity: 1;
-  height: auto;
   margin-top: 2px;
 }
 
 .timeline-event:hover .event-marker {
   transform: scale(1.2);
-}
-
-.timeline-event:hover .event-label {
-  opacity: 1;
-  max-width: none;
 }
 
 .timeline-event.active .event-marker {
@@ -522,13 +566,11 @@ const isPassed = (event: TimelineEvent) => {
 }
 
 .timeline-event.active .event-label {
-  opacity: 1;
   font-weight: bold;
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.2);
   padding: 2px 8px;
   max-width: none; /* Show full width for active events */
-  z-index: 30; /* Ensure active label is on top */
 }
 
 .timeline-event.passed .event-marker {

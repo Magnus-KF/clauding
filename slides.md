@@ -1620,8 +1620,6 @@ src: ./pages/fluid-magic-demo.md
 --- 
 
 ---
-layout: timeline
-currentDate: '2025-03-17'
 ---
 
 First try...
@@ -1657,46 +1655,67 @@ It'll commit and push the changes for you too:
   state changes matching the conversion capabilities in the requirements.
 ```
 
+
+---
+layout: timeline
+currentDate: '2025-03-18'
+---
+## Using context
+CC will try to find relevant context on its own, when processing prompts.
+
+
+>Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
+
+```
+>Think deeply about this one, because I want you to be creative
+and come up with a new component that would be a nice addition
+to this slidev presentation. Make a new vue component and add
+it a new slide in /pages
+```
+
+---
+layout: default
+src: ./pages/code-metrics.md
+---
+
+---
+layout: timeline
+currentDate: '2025-03-18'
+---
+
+## Impressive, but not quite 100%
+
+It manged to parse the components and this 1700 line long presentation. And figured out the presentation had to do with **Code Evolution**
+
+It added the new slide to the presentation (unprompted), it missed the breakpoint by one slide, where I went off the rails and switched to writing about Claude instead.
+
+Initally it tried to do something much more fancy than the bar graph it ended up with. The inital idea was good, but it was one of those 80% AI solutions.
+
+And if you look closely at it, you can see the extra finger.
+
 ---
 layout: timeline
 currentDate: '2025-03-17'
 ---
-
-## Limitations:
+## Cons
 ```
 ● Read(file_path: "slides.md")…
   ⎿  File content (26011 tokens) exceeds maximum allowed tokens (20000). Please use offset and limit
       parameters to read specific portions of the file, or use the GrepTool to search for specific 
      content.
 ```
-slides.md is currently 1600 lines long
+slides.md is currently 1600 lines long. But managed to get around it in one example
 
 
 `Can you make the events more readable on hover`
 
 Struggles with css and such. Which makes some sense. Can also forget about tailwind etc
 
-It tried and failed to fix the visual error at the end of the timeline. But works surprisingly well using these relativly niche frameworks
+It tried and failed to fix the visual errors at the end of the timeline. But works surprisingly well using these relativly niche tools
 
 💸💸💸
 ![alt text](/image-1.png)
 
----
-layout: timeline
-currentDate: '2025-03-19'
----
-## Live demo
-
->Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
-
-Think deeply about this one, because I want you to make an interactive zen garden/pond.
-Make a component that has a canvas with randomly generated *rocks* surrounded by *water*.
-When the user clicks on the screen, waves radiates outward and the rocks cause disruption of the waves. It returns to stillness after the waves have settled.
-I want you to make a new component and then add it and only it to `/pages/zen.md`.
-
----
-src: ./pages/zen.md
----
 
 ---
 layout: timeline

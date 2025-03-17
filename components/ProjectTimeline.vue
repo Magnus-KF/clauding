@@ -531,7 +531,7 @@ const isPassed = (event: TimelineEvent) => {
   white-space: nowrap;
   font-size: 0.75rem;
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.6);
   padding: 2px 6px;
   border-radius: 4px;
   max-width: 120px;

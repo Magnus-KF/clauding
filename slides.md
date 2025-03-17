@@ -1662,18 +1662,18 @@ layout: timeline
 currentDate: '2025-03-17'
 ---
 
-## Live test
-Would you kindly fix the timeline component.
+## Some limitations:
 ```
-  { date: '2025-03-17', title: 'Monday' },
-  { date: '2025-03-19', title: 'Today' }
+● Read(file_path: "slides.md")…
+  ⎿  File content (26011 tokens) exceeds maximum allowed tokens (20000). Please use offset and limit
+      parameters to read specific portions of the file, or use the GrepTool to search for specific 
+     content.
 ```
-These events are quite close and that causes visual bugs.
-The circle for 'Monday' appears after 'Today', despite being an earlier date. 
-Slightly more distance between them would also be nice. 
+slides.md is currently 1600 lines long
+
 ---
 layout: timeline
 currentDate: '2025-03-19'
 ---
+## Live test
 
-## Wednesday

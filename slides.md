@@ -9,6 +9,8 @@ Been working on the project for X months and recently v1 was released and though
 
 There is a lot more to a project than the git history, but for the sake of time and simplicity, I am going to focus on the code.
 
+And mostly not on features of fluidmagic, since that might not be super interesting
+
 An overview of what I've learned working on a python project for Equinor for quite a long time
 
 Maybe some useful information for you
@@ -905,6 +907,7 @@ currentDate: '2023-02-13'
   date="2023-02-13"
 />
 
+
 ---
 src: ./pages/plot.md
 ---
@@ -1047,6 +1050,97 @@ currentDate: '2023-05-25'
 
 ---
 layout: timeline
+currentDate: '2023-05-25'
+---
+## `pyproject.toml (6c1f331)`
+```
+[tool.poetry]
+name = "fluidmagic"
+version = "0.7.0"
+description = "Advanced fluid simulation tool"
+authors = ["Equinor ASA"]
+readme = "README.md"
+packages = [
+    {include = "fluidmagic"}
+]
+
+[tool.poetry.scripts]
+fluidmagic = "fluidmagic.fluid_magic:main"
+
+[tool.poetry.dependencies]
+python = ">=3.8.1, <3.12"
+ecl-data-io = "^2.1.0"
+numpy = "^1.24.2"
+matplotlib = "^3.7.1"
+scipy = "^1.10.1"
+sympy = "^1.11.1"
+tqdm = "^4.65.0"
+typer = "^0.7.0"
+plotly = "^5.13.1"
+openpyxl = "^3.1.2"
+pandas = "^2.0.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+pre-commit = "^3.2.1"
+isort = "^5.12.0"
+flake8 = "^6.0.0"
+pytest = "^7.2.2"
+pytest-xdist = "^3.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ". src"
+testpaths = "tests"
+# addopts = -m "not slow"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "very_slow: marks tests as very slow (deselect with '-m \"not very_slow\"')",
+    "serial",
+]
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include='\.pyi?$'
+extend-exclude = '''\.git |
+            \.__pycache__|
+            \.hg|
+            \.mypy_cache|
+            \.tox|
+            \.venv|
+            _build|
+            buck-out|
+            build|
+            dist'''
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.flake8]
+max_line_length="120"
+select="E9, F63, F7, F82, F4, H4"
+ignore="E203,E266,W504,E501"
+
+```
+
+---
+layout: timeline
+currentDate: '2023-05-25'
+---
+Poetry gives you easy control and config of your python project
+- Versioning
+- Handles venvs
+- Deps, you can sort them in cats
+- various config
+- Centralized everything, no longer need a bunch of config files cluttering up root
+
+---
+layout: timeline
 currentDate: '2023-06-06'
 ---
 
@@ -1106,6 +1200,10 @@ currentDate: '2023-06-27'
 ---
 
 FastAPI + pydantic = easy API setup
+
+Routing, validation, response formatting, documentation (swagger) gets done automagically
+
+Template available in Equinor space
 ```py
 description_md = """
 ### Description
@@ -1180,16 +1278,173 @@ if __name__ == "__main__":
     cli()  # run commands in cli() group
 ```
 
+
+
 ---
 layout: timeline
-currentDate: '2025-02-13'
+currentDate: '2023-07-10'
 ---
 
+<CommitInfo 
+  title="ci: release please (#628)"
+  author="Aleksander Mats Karlsson"
+  :message="'* 🔥 Delete create_new_release.yml workflow\n\n* 🔥 Remove version checker CI workflow\n\n* 🎨 Restructure workflows to be more reusable\n\nMove linting actions to its own separate workflow (where it belongs)!\n\n* 👷 Add release please workflow\n\n* 🐛 Fix bug, missing period in \`.github\`\n\n* chore: Update names of workflows\n\n* ci: Add workflow to lint pr title\n\n* fix: names\n\n* refactor: Move verify todos, improve names\n\n* fix: name\n\n* chore: minor changes, delete file\n\nFile should be deleted according to Andre.\n\n* chore: 🔧 Put poetry-check at start of pre-commit\n\nIt tends to fail more than other checks so start with that to reduce time waste.\n\n* chore: 🔥 Remove redundant pre-commit check\n\n* refactor: ♻️ Move todo-lint to todo-check workflow\n\nSeparate poetry-check and lock in workflow.'"
+  changes="14 files changed, 349 insertions(+), 473 deletions(-)"
+  :files="[{'path': '.github/pull_request_template.md', 'status': 'Modified'},{'path': '.github/workflows/build.yml', 'status': 'Modified'},{'path': '.github/workflows/conventional-pr-title.yml', 'status': 'Added'},{'path': '.github/workflows/create_new_release.yml', 'status': 'Deleted'},{'path': '.github/workflows/lint.yml', 'status': 'Added'},{'path': '.github/workflows/on-push-any-branch.yml', 'status': 'Added'},{'path': '.github/workflows/release-please.yml', 'status': 'Added'},{'path': '.github/workflows/todo-check.yml', 'status': 'Added'},{'path': '.github/workflows/verify.yml', 'status': 'Deleted'},{'path': '.pre-commit-config.yaml', 'status': 'Modified'},{'path': 'README.md', 'status': 'Modified'},{'path': 'fluidmagic/writers/dataframe_writer.py', 'status': 'Modified'},{'path': 'poetry.lock', 'status': 'Modified'},{'path': 'pyproject.toml', 'status': 'Modified'},{'path': 'tests/test_files/integration_test/Forecast_Compositions.magic', 'status': 'Deleted'}]"
+  date="2023-07-10"
+/>
+
+---
+layout: timeline
+currentDate: '2023-07-10'
+---
+## `workflows/release-please.yml (6e16998)`
+
+```yaml
+name: 🔖 Release please
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release_please:
+    name: 🔖 Release Please
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release
+        id: release
+        uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: python
+          package-name: fluidmagic
+          bump-minor-pre-major: true
+          changelog-types: >
+            [{"type":"build", "section":"📦 Build system","hidden":false},
+            {"type":"chore", "section":"🧹 Chores","hidden":false},
+            {"type":"ci", "section":"👷 CI/CD","hidden":false},
+            {"type":"docs","section":"📝 Documentation","hidden":false},
+            {"type":"feat","section":"✨ Features","hidden":false},
+            {"type":"fix","section":"🐛 Bug Fixes","hidden":false},
+            {"type":"perf", "section":"⚡️ Performance","hidden":false},
+            {"type":"refactor", "section":"♻️ Refactor","hidden":false},
+            {"type":"revert", "section":"⏪️ Revert","hidden":false},
+            {"type":"style","section":"💄 Style","hidden":false},
+            {"type":"test", "section":"✅ Tests","hidden":false}]
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+```
+
+---
+layout: timeline
+currentDate: '2023-07-10'
+---
+> Checks that all PRs follow convention
+## `workflows/conventional-pr-title.yml (6e16998)`
+```
+name: 🚨 Lint PR title
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PR_LABEL: ⚠️ Invalid PR title
+jobs:
+  lint-pr:
+    name: 🚨 Lint PR title
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout current PR
+        run: gh pr checkout $GITHUB_HEAD_REF
+
+      - name: Create Label
+        continue-on-error: true
+        run: gh label create ${{ env.PR_LABEL }}
+
+      - name: Lint pull request title
+        uses: jef/conventional-commits-pr-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove label
+        run: gh pr edit --remove-label ${{ env.PR_LABEL }}
+
+      - name: Add label
+        if: ${{ failure() }}
+        run: gh pr edit --add-label ${{ env.PR_LABEL }}
+```
+
+---
+layout: timeline
+currentDate: '2023-07-10'
+---
+> todo-checks are handy
+> - Gets TODO# from PR and checks that it has been removed from codebase.
+> - Makes sure todos are in standardized format
+## `workflows/on-push-any-branch.yml (6e16998)`
+
+```
+name: 👷 Push
+
+# On push to any branch.
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+
+
+jobs:
+  lint:
+    name: 💄 Code Quality
+    uses: ./.github/workflows/lint.yml
+
+  todo-check:
+    name: 🧐 Check TODOs
+    uses: ./.github/workflows/todo-check.yml
+
+  test:
+    name: ✅ Build & test
+    uses: ./.github/workflows/build.yml
+    with:
+      fast_tests: "true"
+```
+---
+src: ./pages/monorepo-pr.md
+---
+
+---
+layout: timeline
+currentDate: '2023-08-21'
+---
+Was a pretty painful implementation.
+
+Look up *release please manifest*, if you want to try it for your project
+
+Because of reasons the path to main now looks like this: 
+
+`FluidMagic/fluidmagic/fluidmagic/fluid_magic.py (3909b35)`
+
+---
+layout: timeline
+currentDate: '2023-08-21'
+---
 # Something
 
 - MVP functionality completed
 - First user testing session
 - Feedback integration plan
+
 
 ---
 layout: timeline

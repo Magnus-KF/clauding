@@ -1420,6 +1420,8 @@ jobs:
       fast_tests: "true"
 ```
 ---
+layout: timeline
+currentDate: '2023-08-21'
 src: ./pages/monorepo-pr.md
 ---
 
@@ -1437,102 +1439,60 @@ Because of reasons the path to main now looks like this:
 
 ---
 layout: timeline
-currentDate: '2023-08-21'
+currentDate: '2023-09-13'
 ---
-# Something
-
-- MVP functionality completed
-- First user testing session
-- Feedback integration plan
-
-
----
-layout: timeline
-currentDate: '2023-05-20'
----
-
-# Major Challenge
-May 20, 2023
-- Performance optimization needed
-- Scaling architecture
-- Team retrospective 
-
----
-layout: timeline
-currentDate: '2023-07-15'
----
-
-# Mid-Project Review
-July 15, 2023
-
-- Stakeholder demo
-- Feature prioritization
-- Growth metrics analysis
-
----
-layout: timeline
-currentDate: '2023-10-05'
----
-
-# Final Testing
-October 5, 2023
-
-- Comprehensive QA
-- User acceptance testing
-- Documentation review
-
----
-layout: timeline
-currentDate: '2023-11-30'
----
-
-# Project Delivery
-November 30, 2023
-
-- Production deployment
-- Customer onboarding
-- Knowledge transfer complete
-
----
-layout: timeline
-currentDate: '2023-12-10'
----
-
-# oioio
 
 <CommitInfo 
-  title="Move tests out of numeric file to separate file (#62)"
-  author="Arvid Gräns"
-  message="Moving tests out of fm_numeric.py into a separate file in test folder. This improves structure and testability."
-  changes="3 files changed, 61 insertions(+), 43 deletions(-)"
-  :files="['requirements.txt', 'src/fm_numerics.py', 'tests/numerics_test.py']"
-  date="2023-11-28"
+  title="chore(main): release fluidmagic 0.11.0 (#684)"
+  author="github-actions[bot]"
+  :message="'Co-authored-by: github-actions[bot] [41898282+github-actions[bot]@users.noreply.github.com]'"
+  changes="3 files changed, 61 insertions(+), 3 deletions(-)"
+  :files="[{'path': '.release-please-manifest.json', 'status': 'Modified'},{'path': 'fluidmagic/CHANGELOG.md', 'status': 'Added'},{'path': 'fluidmagic/pyproject.toml', 'status': 'Modified'}]"
+  date="2023-09-13"
+/>
+---
+layout: timeline
+currentDate: '2023-09-13'
+---
+First release with release-please.
+
+Updates version in manifest-file and pyproject.toml (each subproject has its own toml file)
+
+Also makes a proper changelog
+
+---
+layout: timeline
+currentDate: '2023-09-13'
+src: ./pages/cl-0110-fm.md
+---
+
+---
+layout: timeline
+currentDate: '2023-10-27'
+---
+
+<CommitInfo 
+  title="feat: 🐵✨✅♻️👷New endpoints and internal model based on yaml and blob files(#880)"
+  author="Magnus Kvittingen Fresvik"
+  :message="'* Dependency injection CaseRunner\n\n* Added facilities model and endpoint, in startup config\n\n* update env template\n\n* change radixconfig to promotion-style\n\n* add functionality to run with process\n\n* Optional support for modelling yaml\n\n---------\n\nCo-authored-by: Boathy Murugendran [murugend@gmail.com]'"
+  changes="33 files changed, 1129 insertions(+), 551 deletions(-)"
+  :files="[{'path': '.github/workflows/on-push-api.yml', 'status': 'Modified'},{'path': 'api/.env-template', 'status': 'Modified'},{'path': 'api/api/app.py', 'status': 'Modified'},{'path': 'api/api/config.py', 'status': 'Modified'},{'path': 'api/api/entities/ConverterItem.py', 'status': 'Modified'},{'path': 'api/api/entities/Converters.py', 'status': 'Modified'},{'path': 'api/api/entities/FacilitiesItem.py', 'status': 'Added'},{'path': 'api/api/entities/WellDataInputItem.py', 'status': 'Modified'},{'path': 'api/api/entities/WellDataItem.py', 'status': 'Modified'},{'path': 'api/api/features/facilities/facilities_feature.py', 'status': 'Added'},{'path': 'api/api/features/facilities/use_cases/get_facilities.py', 'status': 'Added'},{'path': 'api/api/features/gudrun/case_data/dummy_local/dummy_eos.e300', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/case_data/dummy_local/dummy_fluid_lib.txt', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/gudrun_feature.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/get_converter_by_id.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/get_converters.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/post_convert_rate_to_moles.py', 'status': 'Deleted'},{'path': 'api/api/features/rate_to_moles/case_data/dum/dum_libfile.txt', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/dum/eos/wack.e300', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/dum/processes/dum_wack_process.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/magic/dum_eos_collection.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/magic/dum_process_collection.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/rate_to_moles_feature.py', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/use_cases/post_convert_rate_to_moles.py', 'status': 'Added'},{'path': 'api/api/features/whoami/whoami_feature.py', 'status': 'Modified'},{'path': 'api/api/fm_config.py', 'status': 'Added'},{'path': 'api/poetry.lock', 'status': 'Modified'},{'path': 'api/pyproject.toml', 'status': 'Modified'},{'path': 'api/radixconfig.yaml', 'status': 'Modified'},{'path': 'api/tests/conftest.py', 'status': 'Modified'},{'path': 'api/tests/integration/features/facilities/facilities_feature_test.py', 'status': 'Added'},{'path': 'api/tests/integration/features/gudrun/gudrun_feature_test.py', 'status': 'Deleted'},{'path': 'api/tests/integration/features/rate_to_moles/rate_to_moles_feature_test.py', 'status': 'Added'},{'path': 'api/tests/startup_data_test.magic', 'status': 'Added'}]"
+  date="2023-10-27"
 />
 
 ---
 layout: timeline
-currentDate: '2023-12-15'
+currentDate: '2023-10-27'
 ---
+By this point the API is hosted on radix with in a dev and prod env.
 
-# Critical Security Fix
+Blob storage on Azure.
 
-<CommitInfo 
-  title="Fix security vulnerability in authentication module (#78)"
-  author="Magnus Nordin"
-  message="Fixed a critical security vulnerability in the authentication module that could allow unauthorized access. Updated dependency versions and added additional validation steps."
-  changes="5 files changed, 87 insertions(+), 32 deletions(-)"
-  :files="['package.json', 'src/auth/authenticate.js', 'src/auth/validation.js', 'tests/auth_test.js', 'README.md']"
-  date="2023-12-03"
-/>
+Was pretty bodgy. Fluidmagic was still desgined to be a CLI-app. So there were some wrappers and workarounds to get it running.
+
 
 ---
 layout: timeline
+currentDate: '2025-03-17'
 ---
-
-# Security Impact Analysis
-## Associated with the Critical Security Fix
-
-- No user data was compromised
-- Attack vector required authenticated access
-- Deployed to production within 24 hours of discovery
-- All dependencies updated to latest secure versions
+It was at this point that I realized Claude Code is way more interesting than whatever I'm trying to do here.

@@ -1,8 +1,3 @@
----
-layout: timeline
-currentDate: '2023-08-21'
----
-
 <CommitInfo 
   title="ci: Restructuring FluidMagic as monorepo and dockerizing the api. (#686)"
   author="Arvid Gräns"

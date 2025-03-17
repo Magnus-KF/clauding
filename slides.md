@@ -1,6 +1,9 @@
 ---
 layout: timeline
 currentDate: '2020-11-05'
+theme: dracula
+# canvasWidth: 1200
+# aspectRatio: 16/9
 ---
 # In the beginning
 There was nothing
@@ -1482,17 +1485,75 @@ currentDate: '2023-10-27'
 
 ---
 layout: timeline
-currentDate: '2023-10-27'
+currentDate: '2025-03-17'
 ---
-By this point the API is hosted on radix with in a dev and prod env.
+## And unfortunately this too became an AI talk
 
-Blob storage on Azure.
+ It was at this point that I realized Claude Code is way more interesting than whatever I'm trying to do here.
 
-Was pretty bodgy. Fluidmagic was still desgined to be a CLI-app. So there were some wrappers and workarounds to get it running.
+ 62 slides and I haven't even made it to v0.2
 
+ This was a presentation about the project I'm working on
+
+ Based around the git history of the project, from beginning to present day
+
+ Code on screen is boring, so decided to check out slidev
+
+ >Slidev (slide + dev, /slaɪdɪv/) is a web-based slides maker and presenter. It's designed for developers to focus on writing content in Markdown while also having the power of HTML and Vue components to deliver pixel-perfect layouts and designs with embedded interactive demos in your presentations.
+ 
+ I wanted some custom components, a timeline and a commit summary for the commits I would talk about
+
+ But I do not know Vue, just barely know js
 
 ---
 layout: timeline
-currentDate: '2025-03-17'
+currentDate: '2025-03-19'
 ---
-It was at this point that I realized Claude Code is way more interesting than whatever I'm trying to do here.
+
+\> Would you kindly update CommitInfo component to support status
+   of files in this format:
+```ts
+  :files="[{'path': 'fluidmagic/eos/eos.py', 'status': 'Modified'},
+  {'path': 'fluidmagic/eos/eos_tools.py', 'status': 'Deleted'},
+  {'path': 'fluidmagic/eos/eos_utils.py', 'status': 'Added'}]"
+```
+  But it should also be backwards compatible with the simple 
+  lists:
+```ts
+:files="['.bumpversion.cfg','README.md']
+```
+
+● I'll update the CommitInfo component to support both file
+  formats.
+
+---
+layout: timeline
+currentDate: '2025-03-19'
+---
+● I've updated the CommitInfo component to support both file
+  formats and include file status indicators:
+
+  1. Added support for both file formats:
+    - Simple string arrays: `['.bumpversion.cfg','README.md']`
+    - Detailed objects: `[{'path': 'fluidmagic/eos/eos.py', 'status': 'Modified'}]`
+  2. Added status indicators:
+    - 'Added' - Green plus icon
+    - 'Deleted' - Red minus icon with strikethrough text
+    - 'Modified' - Blue edit icon
+    - 'Changed' - Yellow update icon
+  3. Enhanced the file display:
+    - Shows only the filename with optional path context
+    - Visual styling for each status type (color-coded icons)
+    - Strikethrough for deleted files
+    - Maintains file extension syntax highlighting
+  4. Made the component backward compatible:
+    - Simple string arrays default to 'Modified' status
+    - File paths are properly parsed to display just the
+  filename when needed
+  1. Changed the heading from "Modified files" to "Changed
+  files" to better reflect the variety of statuses now
+  supported.
+
+  The component now provides a more GitHub-like experience with
+  visual status indicators while maintaining compatibility with
+  both file list formats.

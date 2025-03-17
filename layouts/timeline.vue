@@ -65,6 +65,7 @@ const timelineData = [
   { date: '2025-01-01', title: '2025' },
   // { date: '2024-11-30', title: 'Project Delivery' },
   // { date: '2024-12-10', title: 'Key Project Commits' },
+  { date: '2025-03-17', title: 'Monday' },
   { date: '2025-03-19', title: 'Today' }
 ];
 

@@ -2,7 +2,7 @@
 layout: timeline
 currentDate: '2020-11-05'
 theme: dracula
-# canvasWidth: 1200
+canvasWidth: 1000
 # aspectRatio: 16/9
 ---
 # In the beginning
@@ -1560,6 +1560,68 @@ currentDate: '2025-03-17'
  I wanted some custom components, a timeline and a commit summary for the commits I would talk about
 
  But I do not know Vue, just barely know js
+---
+---
 
- 
+```
+> Think hard and creatively for this next task.
 
+  I want you to create a new component that metaphorically visualizes the operations of FluidMagic.
+   
+
+  """FluidMagic™ is a software tool for consistent conversion of fluid streams, it includes:
+
+  - Conversion from volumes to molar compositions.
+  - Conversions from molar compositions to volumes.
+  - Conversions between different EOS descriptions (moles-to-moles).
+  - Conversion from moles to mass and from mass to volumes.
+  """
+
+  So something dynamic that changes states and it should support a simple user interaction.
+
+  I then want you to make a file in /pages that implements this new component
+```
+
+---
+---
+
+```
+✻ Thinking…
+  I'll create a new Vue component that visually represents FluidMagic's operations. This would be a
+   dynamic visualization that shows the conversion between different fluid states (volumes, molar 
+  compositions, mass, etc.) and includes some user interaction.
+
+  Let's break down what I need to do:
+
+  1. Create a new component in the components directory
+  2. Design a visualization that shows conversion between different states
+  3. Add user interaction to allow users to see different conversions
+  4. Create a page in /pages that implements this component
+
+  Before I start, let me explore the project structure to understand the existing Vue components 
+  and their style.
+
+  - /home/magnus/slidev/fluidmagic-retro/
+    - components/
+      - CommitInfo.vue
+      - Counter.vue
+      - ProjectTimeline.vue
+    - layouts/
+      - timeline.vue
+    - pages/
+      - imported-slides.md
+    - slides.md
+
+  Let me check the existing components to understand the styling and component structure.
+```
+
+---
+src: ./pages/fluid-magic-demo.md
+--- 
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+
+First try...

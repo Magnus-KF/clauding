@@ -57,10 +57,12 @@ const timelineEvents = ref([])
 // without hardcoding slide numbers (which would break when inserting new slides)
 const timelineData = [
   { date: '2021-11-05', title: 'git init' },
+  { date: '2022-02-09', title: 'Team Seid (8 mo. BMFC)' },
+  { date: '2022-10-05', title: '0 BMFC' },
   // { date: '2022-03-10', title: 'First Milestone' },
-  // { date: '2023-05-20', title: 'Major Challenge' },
-  // { date: '2023-07-15', title: 'Mid-Project Review' },
-  // { date: '2023-10-05', title: 'Final Testing' },
+  { date: '2023-01-01', title: '2023' },
+  { date: '2024-01-01', title: '2024' },
+  { date: '2025-01-01', title: '2025' },
   // { date: '2024-11-30', title: 'Project Delivery' },
   // { date: '2024-12-10', title: 'Key Project Commits' },
   { date: '2025-03-19', title: 'Today' }
@@ -106,16 +108,19 @@ const computedCurrentDate = computed(() => {
   flex-direction: column;
   padding: 0;
   height: 100%;
-  /* Ensure slides can scroll if content exceeds fixed height */
+  /* Enable vertical scrolling when content overflows */
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .timeline-layout .content {
-  padding: 2rem;
-  padding-top: 1.5rem; /* Reduced top padding */
+  padding: 1.5rem;
+  padding-top: 0.5rem; /* Reduced top padding since timeline has more space now */
   flex: 1;
-  /* Adjust min-height now that timeline is smaller */
-  min-height: 630px;
+  /* Allow content to grow as needed with scroll in parent */
+  min-height: min-content;
+  height: auto;
+  overflow: visible;
 }
 
 .no-timeline-message {

@@ -12,7 +12,7 @@
       >
         <div class="event-marker"></div>
         <div class="event-label">
-          <div class="event-title">{{ event.title }}</div>
+          <div class="event-title" v-html="parseEmoji(event.title)"></div>
           <div class="event-date">{{ formatDate(event.date) }}</div>
         </div>
       </div>
@@ -53,6 +53,51 @@ const formatDate = (dateString: string) => {
     day: 'numeric', 
     year: 'numeric' 
   })
+}
+
+// Parse emoji shortcodes in text
+const parseEmoji = (text: string) => {
+  if (!text) return text
+  
+  // Map of common emoji shortcodes to unicode emoji
+  const emojiMap: Record<string, string> = {
+    ':tada:': '🎉',
+    ':rocket:': '🚀',
+    ':fire:': '🔥',
+    ':sparkles:': '✨',
+    ':bug:': '🐛',
+    ':lock:': '🔒',
+    ':bookmark:': '🔖',
+    ':zap:': '⚡',
+    ':ambulance:': '🚑',
+    ':art:': '🎨',
+    ':package:': '📦',
+    ':memo:': '📝',
+    ':bulb:': '💡',
+    ':construction:': '🚧',
+    ':recycle:': '♻️',
+    ':white_check_mark:': '✅',
+    ':wrench:': '🔧',
+    ':hammer:': '🔨',
+    ':ok_hand:': '👌',
+    ':truck:': '🚚',
+    ':gear:': '⚙️',
+    ':books:': '📚',
+    ':speech_balloon:': '💬',
+    ':globe_with_meridians:': '🌐',
+    ':pencil2:': '✏️',
+    ':heavy_plus_sign:': '➕',
+    ':heavy_minus_sign:': '➖',
+    ':rotating_light:': '🚨'
+  }
+  
+  // Replace all emoji shortcodes with their Unicode equivalents
+  let parsedText = text
+  Object.entries(emojiMap).forEach(([shortcode, emoji]) => {
+    parsedText = parsedText.replace(new RegExp(shortcode, 'g'), emoji)
+  })
+  
+  return parsedText
 }
 
 // Calculate timeline start and end dates with safety checks
@@ -98,9 +143,11 @@ const calculatePosition = (event: TimelineEvent) => {
   const minSpacing = 8 // Minimum 8% spacing between events
   
   // Calculate index-based position (evenly spaced)
+  // Add edge padding to prevent labels from being cut off at the edges
+  const edgePadding = 10 // 10% padding from edges
   const indexBasedPercent = totalEvents > 1 
-    ? (eventIndex / (totalEvents - 1)) * 100 
-    : 0
+    ? edgePadding + (eventIndex / (totalEvents - 1)) * (100 - 2 * edgePadding)
+    : 50 // Center if just one event
     
   // Calculate weight factor based on how stretched the timeline is
   // If events are very unevenly distributed, we'll lean more toward index-based positioning
@@ -109,8 +156,14 @@ const calculatePosition = (event: TimelineEvent) => {
     ? Math.min(1, (maxRawGap - maxGapPercent) / 50) // Gradually blend based on how much the max gap exceeds our limit
     : 0
   
+  // For first and last events, use more index-based positioning to keep them from edges
+  let adjustedBlendFactor = blendFactor
+  if (eventIndex === 0 || eventIndex === totalEvents - 1) {
+    adjustedBlendFactor = Math.max(0.7, blendFactor) // At least 70% index-based for edge events
+  }
+  
   // Blend between raw percentage and index-based percentage
-  let blendedPercentage = (1 - blendFactor) * rawPercentage + blendFactor * indexBasedPercent
+  let blendedPercentage = (1 - adjustedBlendFactor) * rawPercentage + adjustedBlendFactor * indexBasedPercent
   
   // Force minimum spacing between events for better readability
   // Find closest events and adjust if needed
@@ -119,7 +172,14 @@ const calculatePosition = (event: TimelineEvent) => {
       const eDate = new Date(e.date).getTime()
       const ePercentage = ((eDate - startDate.value) / timelineSpan.value) * 100
       const eIndex = props.timelineEvents.findIndex(evt => evt.date === e.date)
-      const eBlendedPercentage = (1 - blendFactor) * ePercentage + blendFactor * (eIndex / (totalEvents - 1)) * 100
+      // Use same edge-aware index-based percentage
+      const eIndexBasedPercent = edgePadding + (eIndex / (totalEvents - 1)) * (100 - 2 * edgePadding)
+      // Apply same edge-aware blending
+      const eAdjustedBlendFactor = (eIndex === 0 || eIndex === totalEvents - 1) 
+        ? Math.max(0.7, blendFactor) 
+        : blendFactor
+      const eBlendedPercentage = (1 - eAdjustedBlendFactor) * ePercentage + eAdjustedBlendFactor * eIndexBasedPercent
+      
       return {
         date: e.date,
         position: Math.max(0, Math.min(100, eBlendedPercentage))
@@ -180,14 +240,25 @@ const progressPercentage = computed(() => {
     new Date(a.date).getTime() - new Date(b.date).getTime()
   )
   
-  // If we're before the first event
+  // Get the actual position of the first event for exact matching
+  const firstEventPos = calculatePosition(sortedEvents[0])
+  
+  // If we're at the first event, align progress exactly with it
+  if (props.currentDate === sortedEvents[0]?.date) {
+    return firstEventPos
+  }
+  
+  // If we're before the first event, show a small initial progress
   if (currentDateTimestamp <= new Date(sortedEvents[0]?.date || '').getTime()) {
-    return 0
+    // Show minimal progress before first event
+    return Math.max(2, firstEventPos * 0.5) // At least 2% progress, up to half the first event position
   }
   
   // If we're after the last event
   if (currentDateTimestamp >= new Date(sortedEvents[sortedEvents.length - 1]?.date || '').getTime()) {
-    return 100
+    // Use the position of the last event, not quite 100% to match our adjusted edge padding
+    const lastEventPos = calculatePosition(sortedEvents[sortedEvents.length - 1])
+    return Math.min(100, lastEventPos + 2) // Slightly past the last event position
   }
   
   // Find the events before and after the current date
@@ -231,7 +302,17 @@ const progressPercentage = computed(() => {
 // Check if an event is active (current)
 const isActive = (event: TimelineEvent) => {
   if (!event || !event.date || !props.currentDate) return false
-  return event.date === props.currentDate
+  
+  // Exact date match
+  if (event.date === props.currentDate) return true
+  
+  // For the first slide, also match if we're before the first event
+  if (event === props.timelineEvents[0] && 
+      new Date(props.currentDate).getTime() <= new Date(event.date).getTime()) {
+    return true
+  }
+  
+  return false
 }
 
 // Check if an event has passed
@@ -244,13 +325,16 @@ const isPassed = (event: TimelineEvent) => {
 <style>
 .project-timeline {
   width: 100%;
-  height: 50px;
-  padding: 0.75rem 2rem;
+  height: 60px; /* Increased height for better fit */
+  padding: 0.5rem 2rem 0.75rem 2rem;
   background: rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: background 0.3s ease, box-shadow 0.3s ease;
+  /* Allow timeline to be fully visible */
+  overflow: visible;
+  margin-bottom: 25px; /* Increased margin at bottom to prevent overlap with content */
 }
 
 .project-timeline:hover {
@@ -262,7 +346,7 @@ const isPassed = (event: TimelineEvent) => {
   position: relative;
   height: 4px;
   background: rgba(0, 0, 0, 0.08);
-  margin: 15px 0;
+  margin: 24px 0 12px 0; /* Increased top margin to fit labels */
   border-radius: 2px;
 }
 
@@ -308,6 +392,8 @@ const isPassed = (event: TimelineEvent) => {
   transform: translateX(-50%);
   z-index: 20;
   cursor: pointer;
+  /* Ensure there's enough space on edges */
+  min-width: 100px;
 }
 
 .event-marker {
@@ -330,7 +416,7 @@ const isPassed = (event: TimelineEvent) => {
   font-size: 0.75rem;
   opacity: 0.7;
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   padding: 2px 6px;
   border-radius: 4px;
   max-width: 120px;
@@ -388,6 +474,8 @@ const isPassed = (event: TimelineEvent) => {
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.2);
   padding: 2px 8px;
+  max-width: none; /* Show full width for active events */
+  z-index: 30; /* Ensure active label is on top */
 }
 
 .timeline-event.passed .event-marker {

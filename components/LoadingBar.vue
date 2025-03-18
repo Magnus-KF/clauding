@@ -13,7 +13,6 @@ const props = defineProps({
 })
 
 const progress = ref(0)
-const dots = ref('')
 
 // Calculate the position of the progress bar
 const progressStyle = computed(() => {
@@ -36,9 +35,8 @@ const progressStyle = computed(() => {
   }
 })
 
-// Animation interval references
+// Animation interval reference
 let loadingInterval: number | null = null
-let textInterval: number | null = null
 
 onMounted(() => {
   // Start with a minimal delay to ensure proper rendering
@@ -53,17 +51,11 @@ onMounted(() => {
       }
     }, 30)
   }, 100)  // Initial delay to ensure everything is in place
-
-  // Animate loading dots
-  textInterval = window.setInterval(() => {
-    dots.value = dots.value.length >= 3 ? '' : dots.value + '.'
-  }, 500)
 })
 
 onUnmounted(() => {
-  // Clear intervals on component unmount
+  // Clear interval on component unmount
   if (loadingInterval) clearInterval(loadingInterval)
-  if (textInterval) clearInterval(textInterval)
 })
 </script>
 
@@ -71,7 +63,6 @@ onUnmounted(() => {
   <div class="loading-container">
     <div class="loading-text-container">
       <span class="loading-text">{{ text }}</span>
-      <span class="loading-dots">{{ dots }}</span>
     </div>
     
     <div class="loading-bar-container">
@@ -106,11 +97,6 @@ onUnmounted(() => {
 }
 
 .loading-text {
-  color: #d97757;
-}
-
-.loading-dots {
-  min-width: 3ch;
   color: #d97757;
 }
 

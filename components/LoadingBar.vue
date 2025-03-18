@@ -18,15 +18,22 @@ const dots = ref('')
 
 // Calculate the position of the progress bar
 const progressStyle = computed(() => {
-  // Completely hide bar until it's properly contained
-  const isVisible = progress.value > 10;
-  const opacity = isVisible ? 1 : 0;
+  // Calculate a smooth opacity transition
+  let opacity = 0;
+  
+  if (progress.value > 10 && progress.value <= 15) {
+    // Fade in between 10% and 15%
+    opacity = (progress.value - 10) / 5;
+  } else if (progress.value > 15) {
+    // Fully visible after 15%
+    opacity = 1;
+  }
   
   return {
     width: `${progress.value}%`,
-    transition: progress.value > 0 ? 'width 0.3s ease-out' : 'none',
+    transition: progress.value > 0 ? 'width 0.3s ease-out, opacity 0.3s ease-in-out' : 'none',
     opacity,
-    visibility: isVisible ? 'visible' : 'hidden',
+    visibility: progress.value > 10 ? 'visible' : 'hidden',
   }
 })
 
@@ -42,7 +49,7 @@ onMounted(() => {
       progress.value += 0.5
       
       // When reaching max, reset the bar immediately
-      if (progress.value >= 300) {
+      if (progress.value >= 600) {
         progress.value = 0
       }
     }, 30)
@@ -132,6 +139,6 @@ onUnmounted(() => {
   border-radius: 12px;
   transition: width 0.3s ease-out;
   z-index: 1;
-  max-width: 300%; /* Allow extending far beyond the canvas edge */
+  max-width: 600%; /* Allow extending far beyond the canvas edge */
 }
 </style>

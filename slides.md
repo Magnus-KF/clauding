@@ -1513,9 +1513,6 @@ currentDate: '2025-03-17'
 :files="['.bumpversion.cfg','README.md']
 ```
 
-● I'll update the CommitInfo component to support both file
-  formats.
-
 ---
 layout: timeline
 currentDate: '2023-10-27'
@@ -1535,7 +1532,7 @@ layout: timeline
 currentDate: '2025-03-17'
 ---
 ## It just worked 
-
+```
 ● I've updated the CommitInfo component to support both file
   formats and include file status indicators:
 
@@ -1554,23 +1551,20 @@ currentDate: '2025-03-17'
     - Maintains file extension syntax highlighting
   4. Made the component backward compatible:
     - Simple string arrays default to 'Modified' status
-    - File paths are properly parsed to display just the
-  filename when needed
-  1. Changed the heading from "Modified files" to "Changed
-  files" to better reflect the variety of statuses now
-  supported.
-
+    - File paths are properly parsed to display just the filename when needed
+  5. Changed the heading from "Modified files" to "Changed files" to better reflect the variety of statuses now supported.
+  
   The component now provides a more GitHub-like experience with
   visual status indicators while maintaining compatibility with
   both file list formats.
-
+```
 
 ---
 layout: center
 currentDate: '2025-03-17'
 ---
 
-# And unfortunately this too became an AI talk
+# And then unfortunately this became an AI presentation
 
  It was at this point that I realized this is way more interesting than whatever I'm trying to do here.
 
@@ -1640,7 +1634,6 @@ src: ./pages/fluid-magic-demo.md
 ---
 layout: center
 ---
-
 ## First try...
 I was thinking something more abstract, but this is actually useful to have in a presentation about FluidMagic
 
@@ -1680,18 +1673,212 @@ I was thinking something more abstract, but this is actually useful to have in a
 ```
 
 ---
-layout: timeline
-currentDate: '2025-03-18'
+theme: default
+background: https://source.unsplash.com/collection/94734566/1920x1080
+class: text-center
+highlighter: shiki
+drawings:
+  persist: false
+transition: slide-left
+title: Tools available to Claude
 ---
-## Using context / mind map
 
-Handling context in a much better way
-init etc, claude.md
-CC will try to find relevant context on its own, when processing prompts.
+# Sonnet 3.7 + Tools
+
+<style>
+.tools-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-size: 0.9em;
+}
+.tools-table th {
+  background-color:rgb(253, 163, 67);
+  text-align: left;
+  padding: 12px;
+  font-weight: bold;
+}
+.tools-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: transparent;
+}
+.tools-table tr:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+</style>
+
+<table class="tools-table">
+  <thead>
+    <tr>
+      <th>**Tool**</th>
+      <th>Description</th>
+      <th>Permission Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>AgentTool</strong></td>
+      <td>Runs a sub-agent to handle complex, multi-step tasks</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>BashTool</strong></td>
+      <td>Executes shell commands in your environment</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>GlobTool</strong></td>
+      <td>Finds files based on pattern matching</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>GrepTool</strong></td>
+      <td>Searches for patterns in file contents</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>LSTool</strong></td>
+      <td>Lists files and directories</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>FileReadTool</strong></td>
+      <td>Reads the contents of files</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>FileEditTool</strong></td>
+      <td>Makes targeted edits to specific files</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>FileWriteTool</strong></td>
+      <td>Creates or overwrites files</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>NotebookReadTool</strong></td>
+      <td>Reads and displays Jupyter notebook contents</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>NotebookEditTool</strong></td>
+      <td>Modifies Jupyter notebook cells</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+layout: center
+---
+### **Adjective**
+
+*agentic*
+
+> That behaves like an agent: able to express or expressing agency or control on one's own behalf or on the behalf of another. 
+
+---
+layout: center
+---
+## Developerish
+
+
+```
+  Before I start, let me explore the project structure to understand the existing Vue components 
+  and their style.
+```
+
+```
+  Let me check the existing components to understand the styling and component structure.
+```
+The first time I saw it make a mistake, it did not feel like an LLM hallucinating,
+but a developer working
+
+Considers what it knows it does not know.
+
+> Liberal use of the word know, I know
 
 
 
+---
+layout: center
+---
 
+# Falling for the hype again?
+
+It's copilot with wings, no big deal
+
+But making copilot get the right context is painful
+
+You've already made a mental map of the connections
+
+Why does the stupid bot that can parse the entire codebase in a wink, not get it?
+
+---
+layout: center
+---
+
+## Using context to get it
+
+`init`
+
+```
+## Code Style Guidelines
+- Vue components use Composition API with `<script setup lang="ts">` syntax
+- Component structure: script → template → style
+- Use TypeScript for type safety (`lang="ts"` in script tags)
+- PascalCase for component filenames (e.g., `Counter.vue`, `ProjectTimeline.vue`)
+- camelCase for variables, functions, methods, and props
+- Utility-first CSS with custom classes where needed
+- Define props with type validation and required status
+- Use `computed()` for derived state
+- Prefer defensive coding with optional chaining when appropriate
+
+## Error Handling
+- Use Math.max/min for value clamping
+- Handle null/undefined values with optional chaining
+- Use computed properties for derived data to prevent runtime errors
+```
+
+---
+layout:default
+---
+
+## Finding context
+```
+● Let me check the end of the slides file to see how to
+  incorporate the new slide:
+
+● Bash(tail -n 30                                    …
+      /home/magnus/slidev/fluidmagic-retro/slides.md)
+  ⎿  💸💸💸
+     ![alt text](/image-1.png)
+
+     I know Vue at about the same level as before
+
+
+     ---
+     layout: timeline
+     currentDate: '2025-03-19'
+     ---
+
+     ## Not yet
+     `/mcp`
+     Connections to MCP servers.
+
+     `/review`
+     Claude reviews a pull request
+
+     [Docs](https://docs.anthropic.com/en/docs/agents-and-tools/c
+     laude-code/overview)
+```
+
+---
+layout: center
+---
 ## Testing its limits
 
 Wanted to test its grasp of what it was working on

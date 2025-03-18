@@ -13,7 +13,6 @@ const props = defineProps({
 })
 
 const progress = ref(0)
-const textOpacity = ref(1)
 const dots = ref('')
 
 // Calculate the position of the progress bar
@@ -55,9 +54,8 @@ onMounted(() => {
     }, 30)
   }, 100)  // Initial delay to ensure everything is in place
 
-  // Animate loading text
+  // Animate loading dots
   textInterval = window.setInterval(() => {
-    textOpacity.value = textOpacity.value > 0.5 ? 0.5 : 1
     dots.value = dots.value.length >= 3 ? '' : dots.value + '.'
   }, 500)
 })
@@ -71,8 +69,9 @@ onUnmounted(() => {
 
 <template>
   <div class="loading-container">
-    <div class="loading-text" :style="{ opacity: textOpacity }">
-      {{ text }}{{ dots }}
+    <div class="loading-text-container">
+      <span class="loading-text">{{ text }}</span>
+      <span class="loading-dots">{{ dots }}</span>
     </div>
     
     <div class="loading-bar-container">
@@ -97,12 +96,22 @@ onUnmounted(() => {
   gap: 1rem;
 }
 
-.loading-text {
+.loading-text-container {
   font-size: 2rem;
   font-weight: bold;
-  min-width: 150px;
-  text-align: center;
-  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.loading-text {
+  color: #d97757;
+}
+
+.loading-dots {
+  min-width: 3ch;
+  color: #d97757;
 }
 
 .loading-bar-container {

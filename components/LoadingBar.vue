@@ -13,30 +13,33 @@ const props = defineProps({
 })
 
 const progress = ref(0)
-
+const spinnerIndex = ref(0)
+const spinnerChars = ['⋯', '⋰', '⋱', '⋮', '∴', '∵', '∷', '⁘', '⁙','◦', '◦◦', '◦◦◦']
+// 
 // Calculate the position of the progress bar
 const progressStyle = computed(() => {
   // Calculate a smooth opacity transition
   let opacity = 0;
   
-  if (progress.value > 10 && progress.value <= 15) {
+  if (progress.value > 0 && progress.value <= 50) {
     // Fade in between 10% and 15%
     opacity = (progress.value - 10) / 5;
-  } else if (progress.value > 15) {
+  } else if (progress.value > 50) {
     // Fully visible after 15%
     opacity = 1;
   }
   
   return {
     width: `${progress.value}%`,
-    transition: progress.value > 0 ? 'width 0.3s ease-out, opacity 0.3s ease-in-out' : 'none',
+    transition: progress.value > 0 ? 'width 1s ease-out, opacity 1s ease-in-out' : 'none',
     opacity,
-    visibility: progress.value > 10 ? 'visible' : 'hidden',
+    // visibility: progress.value > 0 ? 'visible' : 'hidden',
   }
 })
 
-// Animation interval reference
+// Animation interval references
 let loadingInterval: number | null = null
+let spinnerInterval: number | null = null
 
 onMounted(() => {
   // Start with a minimal delay to ensure proper rendering
@@ -46,16 +49,22 @@ onMounted(() => {
       progress.value += 0.5
       
       // When reaching max, reset the bar immediately
-      if (progress.value >= 600) {
+      if (progress.value >= 400) {
         progress.value = 0
       }
     }, 30)
   }, 100)  // Initial delay to ensure everything is in place
+  
+  // Animate spinner character
+  spinnerInterval = window.setInterval(() => {
+    spinnerIndex.value = (spinnerIndex.value + 1) % spinnerChars.length
+  }, 100) // Fast animation for smooth transitions
 })
 
 onUnmounted(() => {
-  // Clear interval on component unmount
+  // Clear intervals on component unmount
   if (loadingInterval) clearInterval(loadingInterval)
+  if (spinnerInterval) clearInterval(spinnerInterval)
 })
 </script>
 
@@ -63,6 +72,7 @@ onUnmounted(() => {
   <div class="loading-container">
     <div class="loading-text-container">
       <span class="loading-text">{{ text }}</span>
+      <span class="loading-spinner">{{ spinnerChars[spinnerIndex] }}</span>
     </div>
     
     <div class="loading-bar-container">
@@ -94,10 +104,20 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   margin-bottom: 0.5rem;
+  margin-left: 4rem; /* Move text to the right */
 }
 
 .loading-text {
   color: #d97757;
+  margin-right: 0.5rem;
+}
+
+.loading-spinner {
+  display: inline-block;
+  color: #d97757;
+  font-size: 1.5rem;
+  min-width: 4rem;
+  text-align: left;
 }
 
 .loading-bar-container {
@@ -134,6 +154,6 @@ onUnmounted(() => {
   border-radius: 12px;
   transition: width 0.3s ease-out;
   z-index: 1;
-  max-width: 600%; /* Allow extending far beyond the canvas edge */
+  max-width: 400%; /* Allow extending far beyond the canvas edge */
 }
 </style>

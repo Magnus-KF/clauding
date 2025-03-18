@@ -2,7 +2,7 @@
 layout: timeline
 currentDate: '2020-11-05'
 theme: dracula
-canvasWidth: 1000
+canvasWidth: 1080
 # aspectRatio: 16/9
 ---
 # In the beginning

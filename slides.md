@@ -1471,6 +1471,9 @@ currentDate: '2023-06-27'
   date="2023-06-27"
 />
 
+---
+src: pages/loading-demo.md
+---
 
 ---
 layout: timeline
@@ -1661,6 +1664,9 @@ layout: timeline
 currentDate: '2025-03-18'
 ---
 ## Using context
+
+Handling context in a much better way
+init etc, claude.md
 CC will try to find relevant context on its own, when processing prompts.
 
 
@@ -1685,13 +1691,15 @@ currentDate: '2025-03-18'
 
 ## Impressive, but not quite 100%
 
-It manged to parse the components and this 1700 line long presentation. And figured out the presentation had to do with **Code Evolution**
+It manged to parse the components and this 1700 line long markdown file. And figured out the presentation had to do with **Code Evolution**
 
 It added the new slide to the presentation (unprompted), it missed the breakpoint by one slide, where I went off the rails and switched to writing about Claude instead.
 
 Initally it tried to do something much more fancy than the bar graph it ended up with. The inital idea was good, but it was one of those 80% AI solutions.
 
 And if you look closely at it, you can see the extra finger.
+
+But maybe not fair to expect a thing without a mind to do something that open-ended
 
 ---
 layout: timeline
@@ -1721,4 +1729,8 @@ It tried and failed to fix the visual errors at the end of the timeline. But wor
 layout: timeline
 currentDate: '2025-03-19'
 ---
+
+`/review` 
+Claude reviews a pull request
+
 [Overview](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)

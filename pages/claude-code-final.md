@@ -2,7 +2,6 @@
 layout: default
 ---
 
-# Claude Code
 
 <ClaudeCodeFeatures 
   title="Thank you!"

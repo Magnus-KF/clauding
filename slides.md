@@ -1462,20 +1462,18 @@ src: pages/loading-demo.md
 ---
 
 ---
+layout: center
 ---
 ## What this presentation was about
 
  This was a presentation about the project I'm working on
 
- Based on the git history of the project, from beginning to v1
+ Based on the git history of the project
 
- Code on screen is boring, so decided to check out slidev
+ Using Slidev
 
  >Slidev (slide + dev, /slaɪdɪv/) is a web-based slides maker and presenter. It's designed for developers to focus on writing content in Markdown while also having the power of HTML and Vue components to deliver pixel-perfect layouts and designs with embedded interactive demos in your presentations.
  
- I do not know Vue.
-
- Installed Claude Code to make them for me.
 
 ---
 layout: timeline
@@ -1631,12 +1629,6 @@ currentDate: '2025-03-17'
 src: ./pages/fluid-magic-demo.md
 --- 
 
----
-layout: center
----
-## First try...
-I was thinking something more abstract, but this is actually useful to have in a presentation about FluidMagic
-
 
 ---
 ---
@@ -1712,7 +1704,7 @@ title: Tools available to Claude
 <table class="tools-table">
   <thead>
     <tr>
-      <th>**Tool**</th>
+      <th>Tool</th>
       <th>Description</th>
       <th>Permission Required</th>
     </tr>
@@ -1844,7 +1836,7 @@ layout: center
 ```
 
 ---
-layout:default
+layout: default
 ---
 
 ## Finding context
@@ -1859,7 +1851,7 @@ layout:default
 
      I know Vue at about the same level as before
 
-
+    🟠🟠🟠
      ---
      layout: timeline
      currentDate: '2025-03-19'
@@ -1955,7 +1947,7 @@ I know Vue at about the same level as before
 layout: center
 ---
 
-## More
+## Look into
 `/mcp`
 Connections to MCP servers
 

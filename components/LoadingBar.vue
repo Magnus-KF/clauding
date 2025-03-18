@@ -18,12 +18,15 @@ const dots = ref('')
 
 // Calculate the position of the progress bar
 const progressStyle = computed(() => {
-  const opacity = progress.value < 0.5 ? 0 : 1; // Hide at the very beginning
+  // Completely hide bar until it's properly contained
+  const isVisible = progress.value > 10;
+  const opacity = isVisible ? 1 : 0;
   
   return {
     width: `${progress.value}%`,
     transition: progress.value > 0 ? 'width 0.3s ease-out' : 'none',
     opacity,
+    visibility: isVisible ? 'visible' : 'hidden',
   }
 })
 

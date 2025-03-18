@@ -1777,3 +1777,8 @@ Connections to MCP servers.
 Claude reviews a pull request
 
 [Docs](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)
+
+
+---
+src: ./pages/claude-code-final.md
+---

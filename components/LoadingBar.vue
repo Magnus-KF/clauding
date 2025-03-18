@@ -49,7 +49,7 @@ onMounted(() => {
       progress.value += 0.5
       
       // When reaching max, reset the bar immediately
-      if (progress.value >= 400) {
+      if (progress.value >= 300) {
         progress.value = 0
       }
     }, 30)
@@ -154,6 +154,6 @@ onUnmounted(() => {
   border-radius: 12px;
   transition: width 0.3s ease-out;
   z-index: 1;
-  max-width: 400%; /* Allow extending far beyond the canvas edge */
+  max-width: 300%; /* Allow extending far beyond the canvas edge */
 }
 </style>

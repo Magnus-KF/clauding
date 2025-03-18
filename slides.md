@@ -1458,6 +1458,26 @@ src: ./pages/cl-0110-fm.md
 ---
 
 ---
+src: pages/loading-demo.md
+---
+
+---
+---
+## What this presentation was about
+
+ This was a presentation about the project I'm working on
+
+ Based on the git history of the project, from beginning to v1
+
+ Code on screen is boring, so decided to check out slidev
+
+ >Slidev (slide + dev, /slaɪdɪv/) is a web-based slides maker and presenter. It's designed for developers to focus on writing content in Markdown while also having the power of HTML and Vue components to deliver pixel-perfect layouts and designs with embedded interactive demos in your presentations.
+ 
+ I do not know Vue.
+
+ Installed Claude Code to make them for me.
+
+---
 layout: timeline
 currentDate: '2023-06-27'
 ---
@@ -1471,14 +1491,14 @@ currentDate: '2023-06-27'
   date="2023-06-27"
 />
 
----
-src: pages/loading-demo.md
----
 
 ---
 layout: timeline
 currentDate: '2025-03-17'
 ---
+## A small thing
+
+ Wanted statuses of files changed
 
 \> Would you kindly update CommitInfo component to support status
    of files in this format:
@@ -1498,8 +1518,24 @@ currentDate: '2025-03-17'
 
 ---
 layout: timeline
+currentDate: '2023-10-27'
+---
+
+<CommitInfo 
+  title="feat: 🐵✨✅♻️👷New endpoints and internal model based on yaml and blob files(#880)"
+  author="Magnus Kvittingen Fresvik"
+  :message="'* Dependency injection CaseRunner\n\n* Added facilities model and endpoint, in startup config\n\n* update env template\n\n* change radixconfig to promotion-style\n\n* add functionality to run with process\n\n* Optional support for modelling yaml\n\n---------\n\nCo-authored-by: Boathy Murugendran [murugend@gmail.com]'"
+  changes="33 files changed, 1129 insertions(+), 551 deletions(-)"
+  :files="[{'path': '.github/workflows/on-push-api.yml', 'status': 'Modified'},{'path': 'api/.env-template', 'status': 'Modified'},{'path': 'api/api/app.py', 'status': 'Modified'},{'path': 'api/api/config.py', 'status': 'Modified'},{'path': 'api/api/entities/ConverterItem.py', 'status': 'Modified'},{'path': 'api/api/entities/Converters.py', 'status': 'Modified'},{'path': 'api/api/entities/FacilitiesItem.py', 'status': 'Added'},{'path': 'api/api/entities/WellDataInputItem.py', 'status': 'Modified'},{'path': 'api/api/entities/WellDataItem.py', 'status': 'Modified'},{'path': 'api/api/features/facilities/facilities_feature.py', 'status': 'Added'},{'path': 'api/api/features/facilities/use_cases/get_facilities.py', 'status': 'Added'},{'path': 'api/api/features/gudrun/case_data/dummy_local/dummy_eos.e300', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/case_data/dummy_local/dummy_fluid_lib.txt', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/gudrun_feature.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/get_converter_by_id.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/get_converters.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/post_convert_rate_to_moles.py', 'status': 'Deleted'},{'path': 'api/api/features/rate_to_moles/case_data/dum/dum_libfile.txt', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/dum/eos/wack.e300', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/dum/processes/dum_wack_process.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/magic/dum_eos_collection.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/magic/dum_process_collection.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/rate_to_moles_feature.py', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/use_cases/post_convert_rate_to_moles.py', 'status': 'Added'},{'path': 'api/api/features/whoami/whoami_feature.py', 'status': 'Modified'},{'path': 'api/api/fm_config.py', 'status': 'Added'},{'path': 'api/poetry.lock', 'status': 'Modified'},{'path': 'api/pyproject.toml', 'status': 'Modified'},{'path': 'api/radixconfig.yaml', 'status': 'Modified'},{'path': 'api/tests/conftest.py', 'status': 'Modified'},{'path': 'api/tests/integration/features/facilities/facilities_feature_test.py', 'status': 'Added'},{'path': 'api/tests/integration/features/gudrun/gudrun_feature_test.py', 'status': 'Deleted'},{'path': 'api/tests/integration/features/rate_to_moles/rate_to_moles_feature_test.py', 'status': 'Added'},{'path': 'api/tests/startup_data_test.magic', 'status': 'Added'}]"
+  date="2023-10-27"
+/>
+
+---
+layout: timeline
 currentDate: '2025-03-17'
 ---
+## It just worked 
+
 ● I've updated the CommitInfo component to support both file
   formats and include file status indicators:
 
@@ -1528,50 +1564,28 @@ currentDate: '2025-03-17'
   visual status indicators while maintaining compatibility with
   both file list formats.
 
----
-layout: timeline
-currentDate: '2023-10-27'
----
-
-<CommitInfo 
-  title="feat: 🐵✨✅♻️👷New endpoints and internal model based on yaml and blob files(#880)"
-  author="Magnus Kvittingen Fresvik"
-  :message="'* Dependency injection CaseRunner\n\n* Added facilities model and endpoint, in startup config\n\n* update env template\n\n* change radixconfig to promotion-style\n\n* add functionality to run with process\n\n* Optional support for modelling yaml\n\n---------\n\nCo-authored-by: Boathy Murugendran [murugend@gmail.com]'"
-  changes="33 files changed, 1129 insertions(+), 551 deletions(-)"
-  :files="[{'path': '.github/workflows/on-push-api.yml', 'status': 'Modified'},{'path': 'api/.env-template', 'status': 'Modified'},{'path': 'api/api/app.py', 'status': 'Modified'},{'path': 'api/api/config.py', 'status': 'Modified'},{'path': 'api/api/entities/ConverterItem.py', 'status': 'Modified'},{'path': 'api/api/entities/Converters.py', 'status': 'Modified'},{'path': 'api/api/entities/FacilitiesItem.py', 'status': 'Added'},{'path': 'api/api/entities/WellDataInputItem.py', 'status': 'Modified'},{'path': 'api/api/entities/WellDataItem.py', 'status': 'Modified'},{'path': 'api/api/features/facilities/facilities_feature.py', 'status': 'Added'},{'path': 'api/api/features/facilities/use_cases/get_facilities.py', 'status': 'Added'},{'path': 'api/api/features/gudrun/case_data/dummy_local/dummy_eos.e300', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/case_data/dummy_local/dummy_fluid_lib.txt', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/gudrun_feature.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/get_converter_by_id.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/get_converters.py', 'status': 'Deleted'},{'path': 'api/api/features/gudrun/use_cases/post_convert_rate_to_moles.py', 'status': 'Deleted'},{'path': 'api/api/features/rate_to_moles/case_data/dum/dum_libfile.txt', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/dum/eos/wack.e300', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/dum/processes/dum_wack_process.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/magic/dum_eos_collection.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/case_data/magic/dum_process_collection.magic', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/rate_to_moles_feature.py', 'status': 'Added'},{'path': 'api/api/features/rate_to_moles/use_cases/post_convert_rate_to_moles.py', 'status': 'Added'},{'path': 'api/api/features/whoami/whoami_feature.py', 'status': 'Modified'},{'path': 'api/api/fm_config.py', 'status': 'Added'},{'path': 'api/poetry.lock', 'status': 'Modified'},{'path': 'api/pyproject.toml', 'status': 'Modified'},{'path': 'api/radixconfig.yaml', 'status': 'Modified'},{'path': 'api/tests/conftest.py', 'status': 'Modified'},{'path': 'api/tests/integration/features/facilities/facilities_feature_test.py', 'status': 'Added'},{'path': 'api/tests/integration/features/gudrun/gudrun_feature_test.py', 'status': 'Deleted'},{'path': 'api/tests/integration/features/rate_to_moles/rate_to_moles_feature_test.py', 'status': 'Added'},{'path': 'api/tests/startup_data_test.magic', 'status': 'Added'}]"
-  date="2023-10-27"
-/>
 
 ---
-layout: timeline
+layout: center
 currentDate: '2025-03-17'
 ---
-## And unfortunately this too became an AI talk
 
- It was at this point that I realized Claude Code is way more interesting than whatever I'm trying to do here.
+# And unfortunately this too became an AI talk
 
- 62 slides and I haven't even made it to v0.2
+ It was at this point that I realized this is way more interesting than whatever I'm trying to do here.
 
- This was a presentation about the project I'm working on
+ >62 slides and I haven't even made it to v0.2
 
- Based around the git history of the project, from beginning to present day
-
- Code on screen is boring, so decided to check out slidev
-
- >Slidev (slide + dev, /slaɪdɪv/) is a web-based slides maker and presenter. It's designed for developers to focus on writing content in Markdown while also having the power of HTML and Vue components to deliver pixel-perfect layouts and designs with embedded interactive demos in your presentations.
  
- I wanted some custom components, a timeline and a commit summary for the commits I would talk about
-
- But I do not know Vue, just barely know js
 ---
 ---
 
-```
-> Think hard and creatively for this next task.
+## Testing it further
+ *Think hard* and creatively for this next task.
 
   I want you to create a new component that metaphorically visualizes the operations of FluidMagic.
    
-
+  ```python
   """FluidMagic™ is a software tool for consistent conversion of fluid streams, it includes:
 
   - Conversion from volumes to molar compositions.
@@ -1579,11 +1593,12 @@ currentDate: '2025-03-17'
   - Conversions between different EOS descriptions (moles-to-moles).
   - Conversion from moles to mass and from mass to volumes.
   """
+  ```
 
   So something dynamic that changes states and it should support a simple user interaction.
 
   I then want you to make a file in /pages that implements this new component
-```
+
 
 ---
 ---
@@ -1615,7 +1630,7 @@ currentDate: '2025-03-17'
       - imported-slides.md
     - slides.md
 
-  Let me check the existing components to understand the styling and component structure.
+  **Let me check the existing components to understand the styling and component structure.**
 ```
 
 ---
@@ -1623,13 +1638,19 @@ src: ./pages/fluid-magic-demo.md
 --- 
 
 ---
+layout: center
 ---
 
-First try...
+## First try...
+I was thinking something more abstract, but this is actually useful to have in a presentation about FluidMagic
 
-It'll commit and push the changes for you too:
+
+---
+---
+**It'll commit and push the changes for you too:**
 
 ```
+> commit --no-gpg
 ● Call(Prepare commit)…
   ⎿  Bash(git diff --staged)…
   ⎿  Bash(git log -3 --oneline)…
@@ -1658,19 +1679,22 @@ It'll commit and push the changes for you too:
   state changes matching the conversion capabilities in the requirements.
 ```
 
-
 ---
 layout: timeline
 currentDate: '2025-03-18'
 ---
-## Using context
+## Using context / mind map
 
 Handling context in a much better way
 init etc, claude.md
 CC will try to find relevant context on its own, when processing prompts.
 
 
->Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
+
+
+## Testing its limits
+
+Wanted to test its grasp of what it was working on
 
 ```
 >Think deeply about this one, because I want you to be creative
@@ -1678,6 +1702,8 @@ and come up with a new component that would be a nice addition
 to this slidev presentation. Make a new vue component and add
 it a new slide in /pages
 ```
+
+> Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
 
 ---
 layout: default
@@ -1695,7 +1721,7 @@ It manged to parse the components and this 1700 line long markdown file. And fig
 
 It added the new slide to the presentation (unprompted), it missed the breakpoint by one slide, where I went off the rails and switched to writing about Claude instead.
 
-Initally it tried to do something much more fancy than the bar graph it ended up with. The inital idea was good, but it was one of those 80% AI solutions.
+Initally it tried to do something much more fancy than the graph it ended up with. The inital idea was good, but it was one of those 80% AI solutions.
 
 And if you look closely at it, you can see the extra finger.
 
@@ -1719,10 +1745,23 @@ slides.md is currently 1600 lines long. But managed to get around it in one exam
 
 Struggles with css and such. Which makes some sense. Can also forget about tailwind etc
 
-It tried and failed to fix the visual errors at the end of the timeline. But works surprisingly well using these relativly niche tools
+It tried and failed to fix the literal edge-cases at the end of the timeline. But works surprisingly well using these relativly niche tools
 
 💸💸💸
 ![alt text](/image-1.png)
+
+No windows support at the moment 
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+## Cons cont
+I wouldn't have bothered to learn Vue, just to make a slideshow
+
+But this is how you learn new things, by just making stuff
+
+I know Vue at about the same level as before
 
 
 ---
@@ -1730,7 +1769,11 @@ layout: timeline
 currentDate: '2025-03-19'
 ---
 
+## Not yet
+`/mcp`
+Connections to MCP servers.
+
 `/review` 
 Claude reviews a pull request
 
-[Overview](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)
+[Docs](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)

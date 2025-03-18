@@ -1879,16 +1879,16 @@ layout:default
 ---
 layout: center
 ---
-## Testing its limits
+## Finding its limits
 
-Wanted to test its grasp of what it was working on
+Wanted to test the grasp of what it was working on
 
-```
->Think deeply about this one, because I want you to be creative
-and come up with a new component that would be a nice addition
-to this slidev presentation. Make a new vue component and add
+
+\>**Think deeply** about this one, because I want you to be creative \
+and come up with a new component that would be a nice addition \
+to this slidev presentation. Make a new vue component and add \
 it a new slide in /pages
-```
+
 
 > Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
 
@@ -1898,8 +1898,7 @@ src: ./pages/code-metrics.md
 ---
 
 ---
-layout: timeline
-currentDate: '2025-03-18'
+layout: center
 ---
 
 ## Impressive, but not quite 100%
@@ -1912,7 +1911,7 @@ Initally it tried to do something much more fancy than the graph it ended up wit
 
 And if you look closely at it, you can see the extra finger.
 
-But maybe not fair to expect a thing without a mind to do something that open-ended
+But still impressive
 
 ---
 layout: timeline
@@ -1925,7 +1924,9 @@ currentDate: '2025-03-17'
       parameters to read specific portions of the file, or use the GrepTool to search for specific 
      content.
 ```
-slides.md is currently 1600 lines long. But managed to get around it in one example
+
+slides.md is currently 1600 lines long. But can parse specific parts.\
+For example the final slide was added to line 1800
 
 
 `Can you make the events more readable on hover`
@@ -1937,28 +1938,26 @@ It tried and failed to fix the literal edge-cases at the end of the timeline. Bu
 💸💸💸
 ![alt text](/image-1.png)
 
-No windows support at the moment 
 
 ---
 layout: timeline
 currentDate: '2025-03-17'
 ---
 ## Cons cont
-I wouldn't have bothered to learn Vue, just to make a slideshow
+No windows support at the moment 
 
-But this is how you learn new things, by just making stuff
-
+I wouldn't have bothered to learn Vue, just to make a slideshow \
+But this is how you learn new things, by making stuff \
 I know Vue at about the same level as before
 
 
 ---
-layout: timeline
-currentDate: '2025-03-19'
+layout: center
 ---
 
-## Not yet
+## More
 `/mcp`
-Connections to MCP servers.
+Connections to MCP servers
 
 `/review` 
 Claude reviews a pull request

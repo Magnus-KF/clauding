@@ -159,7 +159,7 @@ onUnmounted(() => {
 
 .loading-text {
   color: #d97757;
-  margin-left: 0.5rem;
+  margin-left: 0.3rem;
 }
 
 .loading-spinner {

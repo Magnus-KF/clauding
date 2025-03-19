@@ -1943,6 +1943,8 @@ But this is how you learn new things, by making stuff \
 I know Vue at about the same level as before
 
 
+It still does not read thoughts
+
 ---
 layout: center
 ---

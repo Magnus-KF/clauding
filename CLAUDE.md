@@ -1,28 +1,32 @@
 # Project Guidelines and Commands
 
 ## Build Commands
-- `npm run dev` or `pnpm dev` - Start development server with auto-reload
-- `npm run build` or `pnpm build` - Build for production
-- `npm run export` or `pnpm export` - Export slides to PDF
+- `pnpm dev` or `npm run dev` - Start development server with auto-reload
+- `pnpm build` or `npm run build` - Build for production
+- `pnpm export` or `npm run export` - Export slides to PDF
+- `pnpm preview` - Preview the built site locally
 
 ## Code Style Guidelines
 - Vue components use Composition API with `<script setup lang="ts">` syntax
-- Component structure: script → template → style
-- Use TypeScript for type safety (`lang="ts"` in script tags)
-- PascalCase for component filenames (e.g., `Counter.vue`, `ProjectTimeline.vue`)
+- Component structure: script → template → style (with scoped styles)
+- PascalCase for component filenames and component registration
 - camelCase for variables, functions, methods, and props
-- Utility-first CSS with custom classes where needed
-- Define props with type validation and required status
-- Use `computed()` for derived state
-- Prefer defensive coding with optional chaining when appropriate
+- Import order: Vue core → external libraries → internal components/utilities
+- Define props with type validation (`defineProps<{...}>()`) 
+- Use `computed()` for derived state and `ref()/reactive()` for reactive data
+- Prefer `const` over `let` unless reassignment is necessary
+- Use consistent indentation (2 spaces) and trailing commas
 
 ## Error Handling
-- Use Math.max/min for value clamping
-- Handle null/undefined values with optional chaining
-- Use computed properties for derived data to prevent runtime errors
+- Use optional chaining (`?.`) and nullish coalescing (`??`) for null/undefined
+- Implement appropriate fallbacks for missing data
+- Use try/catch blocks for async operations
+- Validate user input with defensive programming
+- Leverage TypeScript for compile-time error prevention
 
 ## Project Structure
 - `/components` - Reusable Vue components
 - `/layouts` - Slidev layout templates
-- `/pages` - Additional slide content
+- `/pages` - Slide content files
+- `/public` - Static assets (images, fonts)
 - `/snippets` - Code snippets for slides

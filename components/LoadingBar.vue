@@ -155,19 +155,21 @@ onUnmounted(() => {
   align-items: center;
   margin-bottom: 1rem;
   width: 100%;
+  padding-right: 3rem; /* Shift content slightly to the left */
 }
 
 .loading-text {
   color: #d97757;
-  margin-left: 0.3rem;
+  margin-left: 0.5rem;
 }
 
 .loading-spinner {
   display: inline-block;
   color: #d97757;
   font-size: 1.5rem;
-  min-width: 4rem;
+  width: 2.5rem;
   text-align: right;
+  margin-right: 0.5rem;
 }
 
 .loading-bar-container {

@@ -4,7 +4,6 @@
 - `pnpm dev` or `npm run dev` - Start development server with auto-reload
 - `pnpm build` or `npm run build` - Build for production
 - `pnpm export` or `npm run export` - Export slides to PDF
-- `pnpm preview` - Preview the built site locally
 
 ## Code Style Guidelines
 - Vue components use Composition API with `<script setup lang="ts">` syntax

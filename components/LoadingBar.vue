@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, PropType } from 'vue'
 
 const props = defineProps({
   speed: {
@@ -7,15 +7,38 @@ const props = defineProps({
     default: 1,
   },
   text: {
-    type: String,
+    type: [String, Array] as PropType<string | string[]>,
     default: 'Loading',
   },
 })
 
 const progress = ref(0)
 const spinnerIndex = ref(0)
+const currentTextIndex = ref(0)
+const textOpacity = ref(1)
 const spinnerChars = ['⋯', '⋰', '⋱', '⋮', '∴', '∵', '∷', '⁘', '⁙','◦', '◦◦', '◦◦◦']
-// 
+const defaultTexts = ["Vibing", "Cerebrating", "Thinking", "Loading", "lOaDInG", "Skulking", "Pondering"]
+
+const displayText = computed(() => {
+  if (typeof props.text === 'string') {
+    return props.text
+  } else if (Array.isArray(props.text) && props.text.length > 0) {
+    return props.text[currentTextIndex.value]
+  } else {
+    return defaultTexts[currentTextIndex.value]
+  }
+})
+
+const textList = computed(() => {
+  if (typeof props.text === 'string') {
+    return [props.text]
+  } else if (Array.isArray(props.text) && props.text.length > 0) {
+    return props.text
+  } else {
+    return defaultTexts
+  }
+})
+
 // Calculate the position of the progress bar
 const progressStyle = computed(() => {
   // Calculate a smooth opacity transition
@@ -40,6 +63,21 @@ const progressStyle = computed(() => {
 // Animation interval references
 let loadingInterval: number | null = null
 let spinnerInterval: number | null = null
+let textCycleTimeout: number | null = null
+
+const cycleText = () => {
+  // Start fade out
+  textOpacity.value = 0
+  
+  // After fade out, change text and start fade in
+  setTimeout(() => {
+    currentTextIndex.value = (currentTextIndex.value + 1) % textList.value.length
+    textOpacity.value = 1
+    
+    // Schedule next cycle
+    textCycleTimeout = window.setTimeout(cycleText, 10000)
+  }, 500) // Wait for fade out (500ms)
+}
 
 onMounted(() => {
   // Start with a minimal delay to ensure proper rendering
@@ -59,19 +97,25 @@ onMounted(() => {
   spinnerInterval = window.setInterval(() => {
     spinnerIndex.value = (spinnerIndex.value + 1) % spinnerChars.length
   }, 100) // Fast animation for smooth transitions
+  
+  // Only start text cycling if we have multiple texts
+  if (textList.value.length > 1) {
+    textCycleTimeout = window.setTimeout(cycleText, 10000)
+  }
 })
 
 onUnmounted(() => {
   // Clear intervals on component unmount
   if (loadingInterval) clearInterval(loadingInterval)
   if (spinnerInterval) clearInterval(spinnerInterval)
+  if (textCycleTimeout) clearTimeout(textCycleTimeout)
 })
 </script>
 
 <template>
   <div class="loading-container">
     <div class="loading-text-container">
-      <span class="loading-text">{{ text }}</span>
+      <span class="loading-text" :style="{ opacity: textOpacity, transition: 'opacity 0.5s ease-in-out' }">{{ displayText }}</span>
       <span class="loading-spinner">{{ spinnerChars[spinnerIndex] }}</span>
     </div>
     

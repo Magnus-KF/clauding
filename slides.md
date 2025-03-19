@@ -206,5 +206,300 @@ layout: default
 ```
 
 ---
+theme: default
+background: https://source.unsplash.com/collection/94734566/1920x1080
+class: text-center
+highlighter: shiki
+drawings:
+  persist: false
+transition: slide-left
+title: Tools available to Claude
+---
+
+# Sonnet 3.7 + Tools
+
+<style>
+.tools-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-size: 0.9em;
+}
+.tools-table th {
+  background-color:rgb(253, 163, 67);
+  text-align: left;
+  padding: 12px;
+  font-weight: bold;
+}
+.tools-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: transparent;
+}
+.tools-table tr:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+</style>
+
+<table class="tools-table">
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Description</th>
+      <th>Permission Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>AgentTool</strong></td>
+      <td>Runs a sub-agent to handle complex, multi-step tasks</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>BashTool</strong></td>
+      <td>Executes shell commands in your environment</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>GlobTool</strong></td>
+      <td>Finds files based on pattern matching</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>GrepTool</strong></td>
+      <td>Searches for patterns in file contents</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>LSTool</strong></td>
+      <td>Lists files and directories</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>FileReadTool</strong></td>
+      <td>Reads the contents of files</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>FileEditTool</strong></td>
+      <td>Makes targeted edits to specific files</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>FileWriteTool</strong></td>
+      <td>Creates or overwrites files</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>NotebookReadTool</strong></td>
+      <td>Reads and displays Jupyter notebook contents</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>NotebookEditTool</strong></td>
+      <td>Modifies Jupyter notebook cells</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+layout: center
+---
+### **Adjective**
+
+*agentic*
+
+> That behaves like an agent: able to express or expressing agency or control on one's own behalf or on the behalf of another. 
+
+---
+layout: center
+---
+## Developerish
+
+
+```
+  Before I start, let me explore the project structure to understand the existing Vue components 
+  and their style.
+```
+
+```
+  Let me check the existing components to understand the styling and component structure.
+```
+The first time I saw it make a mistake, it did not feel like an LLM hallucinating,
+but a developer working
+
+Considers what it knows it does not know.
+
+> Liberal use of the word know, I know
+
+
+
+---
+layout: center
+---
+
+# Falling for the hype again?
+
+It's copilot with wings, no big deal
+
+But making copilot get the right context is painful
+
+You've already made a mental map of the connections
+
+Why does the stupid bot that can parse the entire codebase in a wink, not get it?
+
+---
+layout: center
+---
+
+## Using context to get it
+
+`init`
+
+```
+## Code Style Guidelines
+- Vue components use Composition API with `<script setup lang="ts">` syntax
+- Component structure: script → template → style
+- Use TypeScript for type safety (`lang="ts"` in script tags)
+- PascalCase for component filenames (e.g., `Counter.vue`, `ProjectTimeline.vue`)
+- camelCase for variables, functions, methods, and props
+- Utility-first CSS with custom classes where needed
+- Define props with type validation and required status
+- Use `computed()` for derived state
+- Prefer defensive coding with optional chaining when appropriate
+
+## Error Handling
+- Use Math.max/min for value clamping
+- Handle null/undefined values with optional chaining
+- Use computed properties for derived data to prevent runtime errors
+```
+
+---
+layout: default
+---
+
+## Finding context
+```
+● Let me check the end of the slides file to see how to
+  incorporate the new slide:
+
+● Bash(tail -n 30                                    …
+      /home/magnus/slidev/fluidmagic-retro/slides.md)
+  ⎿  💸💸💸
+     ![alt text](/image-1.png)
+
+     I know Vue at about the same level as before
+
+    🟠🟠🟠
+     ---
+     layout: timeline
+     currentDate: '2025-03-19'
+     ---
+
+     ## Not yet
+     `/mcp`
+     Connections to MCP servers.
+
+     `/review`
+     Claude reviews a pull request
+
+     [Docs](https://docs.anthropic.com/en/docs/agents-and-tools/c
+     laude-code/overview)
+```
+
+---
+layout: center
+---
+## Finding its limits
+
+Wanted to test the grasp of what it was working on
+
+
+\>**Think deeply** about this one, because I want you to be creative \
+and come up with a new component that would be a nice addition \
+to this slidev presentation. Make a new vue component and add \
+it a new slide in /pages
+
+
+> Claude will think more based on the words you use. For example, “think hard” will trigger more extended thinking than saying “think” alone.
+
+---
+layout: default
+src: ./pages/code-metrics.md
+---
+
+---
+layout: center
+---
+
+## Impressive, but not quite 100%
+
+It manged to parse the components and this 1700 line long markdown file. And figured out the presentation had to do with **Code Evolution**
+
+It added the new slide to the presentation (unprompted), it missed the breakpoint by one slide, where I went off the rails and switched to writing about Claude instead.
+
+Initally it tried to do something much more fancy than the graph it ended up with. The inital idea was good, but it was one of those 80% AI solutions.
+
+And if you look closely at it, you can see the extra finger.
+
+But still impressive
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+## Cons
+```
+● Read(file_path: "slides.md")…
+  ⎿  File content (26011 tokens) exceeds maximum allowed tokens (20000). Please use offset and limit
+      parameters to read specific portions of the file, or use the GrepTool to search for specific 
+     content.
+```
+
+slides.md is currently 1600 lines long. But can parse specific parts.\
+For example the final slide was added to line 1800
+
+
+`Can you make the events more readable on hover`
+
+Struggles with css and such. Which makes some sense. Can also forget about tailwind etc
+
+It tried and failed to fix the literal edge-cases at the end of the timeline. But works surprisingly well using these relativly niche tools
+
+💸💸💸
+![alt text](/image-1.png)
+
+
+---
+layout: timeline
+currentDate: '2025-03-17'
+---
+## Cons cont
+No windows support at the moment 
+
+I wouldn't have bothered to learn Vue, just to make a slideshow \
+But this is how you learn new things, by making stuff \
+I know Vue at about the same level as before
+
+
+It still does not read thoughts
+
+---
+layout: center
+---
+
+## Look into
+`/mcp`
+Connections to MCP servers
+
+`/review` 
+Claude reviews a pull request
+
+[Docs](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)
+
+
+---
 src: pages/claude-code-final.md
 ---

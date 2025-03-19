@@ -1,37 +1,21 @@
 ---
 theme: dracula
-background: /image.png
 colorSchema: 'dark'
 highlighter: shiki
 lineNumbers: true
 canvasWidth: 1080
----
-
-# FluidMagic - Clauding
-
-<div class="pt-12">
-  <span class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
----
 src: pages/loading-demo.md
 ---
 
----
-layout: center
----
-## What this presentation was about
+# What This Presentation Was About
 
- This was a presentation about the project I'm working on
+This was a presentation about the project I'm working on
 
- Based on the git history of the project
+Based on the git history of the project
 
- Using Slidev
+Using Slidev
 
- >Slidev (slide + dev, /slaɪdɪv/) is a web-based slides maker and presenter. It's designed for developers to focus on writing content in Markdown while also having the power of HTML and Vue components to deliver pixel-perfect layouts and designs with embedded interactive demos in your presentations.
- 
+>Slidev (slide + dev, /slaɪdɪv/) is a web-based slides maker and presenter. It's designed for developers to focus on writing content in Markdown while also having the power of HTML and Vue components to deliver pixel-perfect layouts and designs with embedded interactive demos in your presentations.
 
 ---
 layout: timeline
@@ -222,5 +206,5 @@ layout: default
 ```
 
 ---
-src: pages/zen.md
+src: pages/claude-code-final.md
 ---

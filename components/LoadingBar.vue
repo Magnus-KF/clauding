@@ -52,11 +52,11 @@ const progressStyle = computed(() => {
     opacity = 1;
   }
   
+  // Use raw value to allow going beyond container
   return {
     width: `${progress.value}%`,
     transition: progress.value > 0 ? 'width 1s ease-out, opacity 1s ease-in-out' : 'none',
     opacity,
-    // visibility: progress.value > 0 ? 'visible' : 'hidden',
   }
 })
 
@@ -114,18 +114,18 @@ onUnmounted(() => {
 
 <template>
   <div class="loading-container">
-    <div class="loading-text-container">
-      <span class="loading-text" :style="{ opacity: textOpacity, transition: 'opacity 0.5s ease-in-out' }">{{ displayText }}</span>
-      <span class="loading-spinner">{{ spinnerChars[spinnerIndex] }}</span>
-    </div>
-    
-    <div class="loading-bar-container">
-      <!-- Progress bar that extends -->
-      <div class="loading-bar-progress" :style="progressStyle"></div>
+    <div class="fixed-width-container">
+      <div class="loading-text-container">
+        <span class="loading-spinner">{{ spinnerChars[spinnerIndex] }}</span>
+        <span class="loading-text" :style="{ opacity: textOpacity, transition: 'opacity 0.5s ease-in-out' }">{{ displayText }}</span>
+      </div>
       
-      <!-- Bounding box overlaid on top -->
-      <div class="loading-bar-mask">
+      <div class="loading-bar-container">
+        <!-- Bounding box -->
         <div class="loading-bar-outline"></div>
+        
+        <!-- Progress bar that extends -->
+        <div class="loading-bar-progress" :style="progressStyle"></div>
       </div>
     </div>
   </div>
@@ -138,7 +138,13 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: 1rem;
+}
+
+.fixed-width-container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .loading-text-container {
@@ -147,13 +153,13 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5rem;
-  margin-left: 4rem; /* Move text to the right */
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .loading-text {
   color: #d97757;
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .loading-spinner {
@@ -161,7 +167,7 @@ onUnmounted(() => {
   color: #d97757;
   font-size: 1.5rem;
   min-width: 4rem;
-  text-align: left;
+  text-align: right;
 }
 
 .loading-bar-container {
@@ -170,34 +176,27 @@ onUnmounted(() => {
   height: 30px;
 }
 
-.loading-bar-mask {
+.loading-bar-outline {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.loading-bar-outline {
-  width: 60%;
-  height: 100%;
   border: 3px solid currentColor;
   border-radius: 15px;
-  margin: 0 auto;
   box-sizing: border-box;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .loading-bar-progress {
   position: absolute;
   top: 3px; /* Adjust for the border */
-  left: calc(20% + 3px); /* Align with the inside of the outline */
+  left: 3px; /* Align with the inside of the outline */
   height: calc(100% - 6px); /* Adjust for the border */
   background: linear-gradient(90deg, #4a8cff, #63b3ed);
   border-radius: 12px;
   transition: width 0.3s ease-out;
   z-index: 1;
-  max-width: 300%; /* Allow extending far beyond the canvas edge */
+  max-width: 1200px; /* Allow extending far beyond the container's edge */
+  transform-origin: left center;
 }
 </style>
